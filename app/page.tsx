@@ -161,6 +161,23 @@ export default function HomePage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+    <h2 className="text-lg font-semibold text-slate-900">
+      Educational Bitcoin DeFi Analytics
+    </h2>
+
+    <p className="mt-2 text-sm leading-6 text-slate-600">
+      BitcoinXDeFi Analytics is an independent educational and research dashboard
+      focused on Bitcoin DeFi ecosystems, wrapped BTC infrastructure, liquidity
+      trends, and interoperability analytics.
+    </p>
+
+    <p className="mt-3 text-sm leading-6 text-slate-500">
+      This platform does not offer investments, token sales, custody services,
+      wallet connections, or financial advice.
+    </p>
+  </div>
+        
         <motion.section
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
