@@ -258,10 +258,41 @@ export default function HomePage() {
         </motion.section>
 
         <section className="mb-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <StatCard icon={Database} label="Tracked BTC DeFi TVL" value="$14.3B" sub="Demo data for MVP build" />
-          <StatCard icon={TrendingUp} label="30-Day Growth" value="+7.8%" sub="BTC staking and L2 demand" />
-          <StatCard icon={Wallet} label="Tracked Protocols" value="42" sub="L2s, sidechains, bridges, staking" />
-          <StatCard icon={AlertTriangle} label="High-Risk Exposure" value="18%" sub="Bridge/custody concentration" />
+          <StatCard
+  icon={Bitcoin}
+  label="Live BTC Price"
+  value={btcData ? `$${btcData.price.toLocaleString()}` : "Loading..."}
+  sub="CoinGecko live market data"
+/>
+
+<StatCard
+  icon={TrendingUp}
+  label="BTC 24H Change"
+  value={
+    btcData
+      ? `${btcData.change24h >= 0 ? "+" : ""}${btcData.change24h.toFixed(2)}%`
+      : "Loading..."
+  }
+  sub="Updated every 60 seconds"
+/>
+
+<StatCard
+  icon={Database}
+  label="BTC Market Cap"
+  value={
+    btcData
+      ? `$${Math.round(btcData.marketCap / 1_000_000_000).toLocaleString()}B`
+      : "Loading..."
+  }
+  sub="Live market capitalization"
+/>
+
+<StatCard
+  icon={Wallet}
+  label="Tracked Protocols"
+  value="6"
+  sub="BTC DeFi watchlist"
+/>
         </section>
 
         <section className="mb-8 grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
