@@ -103,6 +103,7 @@ export default function HomePage() {
 
    const [protocols, setProtocols] = useState<any[]>([]);
    const [tvlTrend, setTvlTrend] = useState<any[]>([]);
+   const [wrappedBtcData, setWrappedBtcData] = useState<any[]>([]);
   
   useEffect(() => {
     async function loadBtcData() {
