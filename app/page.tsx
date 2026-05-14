@@ -142,14 +142,6 @@ export default function HomePage() {
 
   const categories = ["All", ...Array.from(new Set(protocols.map((p) => p.category)))];
 
-  const filtered = useMemo(() => {
-    return protocols.filter((p) => {
-      const matchesQuery = `${p.name} ${p.category} ${p.chain}`.toLowerCase().includes(query.toLowerCase());
-      const matchesCategory = category === "All" || p.category === category;
-      return matchesQuery && matchesCategory;
-    });
-  }, [query, category]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950">
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
