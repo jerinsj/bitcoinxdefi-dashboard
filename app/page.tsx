@@ -364,20 +364,20 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+            {/* <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3">
                   <Lock className="h-5 w-5 text-slate-700" />
                   <h3 className="text-lg font-semibold">Owner Controls</h3>
                 </div>
-                <ul className="mt-4 space-y-2 text-sm text-slate-600">
+                 <ul className="mt-4 space-y-2 text-sm text-slate-600">
                   <li>• Redirect .net, .org, and .us to the .com site.</li>
                   <li>• Add a protected contact form for domain inquiries.</li>
                   <li>• Use a separate email, not your personal inbox.</li>
                   <li>• Keep all analytics data read-only and public-source based.</li>
                 </ul>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </section>
 
