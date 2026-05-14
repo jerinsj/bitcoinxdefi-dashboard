@@ -231,9 +231,9 @@ export default function HomePage() {
                 This dashboard should remain educational and analytics-focused. Avoid promising returns, running token sales,
                 or asking users for seed phrases, wallet keys, or exchange login details.
               </p>
-              <div className="mt-5 rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
+              {/* <div className="mt-5 rounded-2xl bg-slate-50 p-4 text-sm text-slate-600">
                 Use domain lock, MFA, private WHOIS, and a dedicated email for inbound domain inquiries.
-              </div>
+              </div> */}
             </CardContent>
           </Card>
         </motion.section>
