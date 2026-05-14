@@ -102,6 +102,7 @@ export default function HomePage() {
   } | null>(null);
 
    const [protocols, setProtocols] = useState<any[]>([]);
+   const [tvlTrend, setTvlTrend] = useState<any[]>([]);
   
   useEffect(() => {
     async function loadBtcData() {
@@ -122,8 +123,19 @@ export default function HomePage() {
     console.error("Failed to load protocols", error);
   }
 }
+   async function loadTvlTrend() {
+  try {
+    const res = await fetch("/api/tvl-trend");
+    const data = await res.json();
+    setTvlTrend(data);
+  } catch (error) {
+    console.error("Failed to load TVL trend", error);
+  }
+}
+    
      loadBtcData();
-      loadProtocols();
+     loadProtocols();
+     loadTvlTrend();
    
   }, []);
 
