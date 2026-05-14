@@ -126,8 +126,18 @@ export default function HomePage() {
         console.error("Failed to load BTC data", error);
       }
     }
-
-    loadBtcData();
+    async function loadProtocols() {
+  try {
+    const res = await fetch("/api/protocols");
+    const data = await res.json();
+    setProtocols(data);
+  } catch (error) {
+    console.error("Failed to load protocols", error);
+  }
+}
+     loadBtcData();
+      loadProtocols();
+   
   }, []);
 
   const categories = ["All", ...Array.from(new Set(protocols.map((p) => p.category)))];
