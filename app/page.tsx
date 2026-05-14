@@ -189,9 +189,9 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-          <Button className="rounded-2xl">
+          {/* <Button className="rounded-2xl">
             Launch App <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button>
+          </Button> */}
         </div>
       </header>
 
