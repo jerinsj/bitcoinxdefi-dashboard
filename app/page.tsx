@@ -114,6 +114,8 @@ export default function HomePage() {
     change24h: number;
   } | null>(null);
 
+   const [protocols, setProtocols] = useState<any[]>([]);
+  
   useEffect(() => {
     async function loadBtcData() {
       try {
