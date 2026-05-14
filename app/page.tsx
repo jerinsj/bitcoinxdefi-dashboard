@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Activity,
@@ -163,6 +163,25 @@ function RiskBadge({ risk }: { risk: string }) {
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [btcData, setBtcData] = useState<{
+    price: number;
+    marketCap: number;
+    change24h: number;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadBtcData() {
+      try {
+        const res = await fetch("/api/btc");
+        const data = await res.json();
+        setBtcData(data);
+      } catch (error) {
+        console.error("Failed to load BTC data", error);
+      }
+    }
+
+    loadBtcData();
+  }, []);
 
   const categories = ["All", ...Array.from(new Set(protocols.map((p) => p.category)))];
 
