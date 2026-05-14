@@ -30,18 +30,6 @@ import {
   CartesianGrid
 } from "recharts";
 
-
-
-
-
-const bridgeData = [
-  { name: "WBTC", value: 62 },
-  { name: "tBTC", value: 13 },
-  { name: "BTC.b", value: 9 },
-  { name: "sBTC", value: 7 },
-  { name: "Other", value: 9 }
-];
-
 const news = [
   "Bitcoin DeFi liquidity rises as L2 ecosystems expand.",
   "BTC staking protocols attract renewed institutional attention.",
@@ -280,10 +268,10 @@ export default function HomePage() {
           <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold">Wrapped BTC Share</h3>
-              <p className="text-sm text-slate-500">Demo bridge/token composition</p>
+              <p className="text-sm text-slate-500">Live wrapped BTC market cap distribution</p>
               <div className="mt-5 h-72">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={bridgeData}>
+                  <BarChart data={wrappedBtcData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
