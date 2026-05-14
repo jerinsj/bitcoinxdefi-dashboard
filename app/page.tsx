@@ -337,20 +337,43 @@ export default function HomePage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filtered.map((p) => (
-                      <tr key={p.name} className="border-t border-slate-100">
-                        <td className="p-4">
-                          <div className="font-semibold text-slate-950">{p.name}</div>
-                          <div className="text-xs text-slate-500">{p.description}</div>
-                        </td>
-                        <td className="p-4 text-slate-600">{p.category}</td>
-                        <td className="p-4 font-medium">{p.tvl === 0 ? "Watchlist" : `$${p.tvl.toLocaleString()}M`}</td>
-                        <td className={`p-4 font-medium ${p.change >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
-                          {p.change >= 0 ? "+" : ""}{p.change}%
-                        </td>
-                        <td className="p-4"><RiskBadge risk={p.risk} /></td>
-                      </tr>
-                    ))}
+  {protocols.map((p) => (
+  <tr key={p.name} className="border-t border-slate-100">
+    <td className="p-4">
+      <div className="font-semibold text-slate-950">
+        {p.name}
+      </div>
+
+      <div className="text-xs text-slate-500">
+        {p.chains?.join(", ")}
+      </div>
+    </td>
+
+    <td className="p-4 text-slate-600">
+      {p.category}
+    </td>
+
+    <td className="p-4 font-medium">
+      ${Math.round(p.tvl).toLocaleString()}
+    </td>
+
+    <td
+      className={`p-4 font-medium ${
+        p.change1d >= 0
+          ? "text-emerald-600"
+          : "text-rose-600"
+      }`}
+    >
+      {p.change1d
+        ? `${p.change1d.toFixed(2)}%`
+        : "N/A"}
+    </td>
+
+    <td className="p-4">
+      Live
+    </td>
+  </tr>
+))}
                   </tbody>
                 </table>
               </div>
