@@ -249,7 +249,7 @@ export default function HomePage() {
               <div className="mb-5 flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-semibold">BTC DeFi TVL Trend</h3>
-                  <p className="text-sm text-slate-500">Demo monthly trend in billions</p>
+                  <p className="text-sm text-slate-500">Live aggregated BTC DeFi protocol TVL in billions</p>
                 </div>
                 <Activity className="h-5 w-5 text-slate-500" />
               </div>
