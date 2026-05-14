@@ -133,10 +133,19 @@ export default function HomePage() {
     console.error("Failed to load TVL trend", error);
   }
 }
-    
+    async function loadWrappedBtc() {
+  try {
+    const res = await fetch("/api/wrapped-btc");
+    const data = await res.json();
+    setWrappedBtcData(data);
+  } catch (error) {
+    console.error("Failed to load wrapped BTC data", error);
+  }
+}
      loadBtcData();
      loadProtocols();
      loadTvlTrend();
+     loadWrappedBtc();
    
   }, []);
 
