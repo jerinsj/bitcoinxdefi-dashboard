@@ -39,9 +39,12 @@ export async function GET() {
   "merlin"
 ];
 
-return keywords.some((k) =>
-  nameText.includes(k) ||
-  chainText.includes(k)
+return (
+  keywords.some((k) =>
+    nameText.includes(k) ||
+    chainText.includes(k)
+  ) &&
+  p.category !== "CEX"
 );
       })
       .slice(0, 12)
