@@ -376,7 +376,7 @@ export default function HomePage() {
     </td>
 
     <td className="p-4">
-      Live
+      Tracked
     </td>
   </tr>
 ))}
