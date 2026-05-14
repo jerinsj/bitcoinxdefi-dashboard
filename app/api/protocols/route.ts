@@ -25,14 +25,24 @@ export async function GET() {
 
         const nameText = p.name?.toLowerCase() || "";
 
-        return (
-          chainText.includes("bitcoin") ||
-          nameText.includes("bitcoin") ||
-          nameText.includes("btc") ||
-          nameText.includes("stacks") ||
-          nameText.includes("rootstock") ||
-          nameText.includes("babylon")
-        );
+        const keywords = [
+  "stacks",
+  "rootstock",
+  "babylon",
+  "lightning",
+  "sovryn",
+  "threshold",
+  "tbtc",
+  "bouncebit",
+  "core",
+  "botanix",
+  "merlin"
+];
+
+return keywords.some((k) =>
+  nameText.includes(k) ||
+  chainText.includes(k)
+);
       })
       .slice(0, 12)
       .map((p: any) => ({
