@@ -32,20 +32,7 @@ import {
 
 
 
-const tvlTrend = [
-  { month: "Jan", tvl: 7.9 },
-  { month: "Feb", tvl: 8.4 },
-  { month: "Mar", tvl: 8.1 },
-  { month: "Apr", tvl: 8.9 },
-  { month: "May", tvl: 9.6 },
-  { month: "Jun", tvl: 10.4 },
-  { month: "Jul", tvl: 11.2 },
-  { month: "Aug", tvl: 10.9 },
-  { month: "Sep", tvl: 12.1 },
-  { month: "Oct", tvl: 12.8 },
-  { month: "Nov", tvl: 13.6 },
-  { month: "Dec", tvl: 14.3 }
-];
+
 
 const bridgeData = [
   { name: "WBTC", value: 62 },
