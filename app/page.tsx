@@ -30,62 +30,7 @@ import {
   CartesianGrid
 } from "recharts";
 
-const protocols = [
-  {
-    name: "Stacks",
-    category: "Bitcoin L2",
-    tvl: 182,
-    change: 8.4,
-    risk: "Medium",
-    chain: "BTC L2",
-    description: "Smart contracts and Bitcoin-secured applications."
-  },
-  {
-    name: "Rootstock",
-    category: "Sidechain",
-    tvl: 121,
-    change: 3.1,
-    risk: "Medium",
-    chain: "RSK",
-    description: "EVM-compatible Bitcoin sidechain ecosystem."
-  },
-  {
-    name: "Babylon",
-    category: "BTC Staking",
-    tvl: 960,
-    change: 14.7,
-    risk: "High",
-    chain: "Bitcoin",
-    description: "Bitcoin staking and restaking narrative tracker."
-  },
-  {
-    name: "Lightning Network",
-    category: "Payments",
-    tvl: 318,
-    change: -1.8,
-    risk: "Low",
-    chain: "Bitcoin",
-    description: "Bitcoin payment channel liquidity and adoption proxy."
-  },
-  {
-    name: "Wrapped BTC",
-    category: "Bridged BTC",
-    tvl: 8500,
-    change: 2.2,
-    risk: "Medium",
-    chain: "Ethereum",
-    description: "Tokenized Bitcoin liquidity across DeFi ecosystems."
-  },
-  {
-    name: "Bitcoin on Cardano",
-    category: "Cardano/BOS",
-    tvl: 0,
-    change: 0,
-    risk: "Research",
-    chain: "Cardano",
-    description: "Watchlist for Bitcoin/Cardano interoperability and BOS narratives."
-  }
-];
+
 
 const tvlTrend = [
   { month: "Jan", tvl: 7.9 },
