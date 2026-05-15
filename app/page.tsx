@@ -163,6 +163,10 @@ export default function HomePage() {
       <a href="/about" className="hover:text-slate-950">
         About
       </a>
+
+      <a href="/methodology" className="hover:text-slate-950">
+    Methodology
+     </a>              
     </nav>
           {/* <Button className="rounded-2xl">
             Launch App <ArrowUpRight className="ml-2 h-4 w-4" />
