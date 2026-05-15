@@ -147,6 +147,7 @@ export default function HomePage() {
             <div className="rounded-2xl bg-orange-100 p-3">
               <Bitcoin className="h-7 w-7 text-orange-600" />
             </div>
+
             <div>
               <h1 className="text-xl font-bold tracking-tight">BitcoinXDeFi Analytics</h1>
               <p className="text-sm text-slate-500">
@@ -154,6 +155,15 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+           <nav className="flex items-center gap-4 text-sm text-slate-600">
+      <a href="/" className="hover:text-slate-950">
+        Dashboard
+      </a>
+
+      <a href="/about" className="hover:text-slate-950">
+        About
+      </a>
+    </nav>
           {/* <Button className="rounded-2xl">
             Launch App <ArrowUpRight className="ml-2 h-4 w-4" />
           </Button> */}
