@@ -4,16 +4,39 @@ import { NextResponse } from "next/server";
 const parser = new Parser();
 
 const feeds = [
-  "https://news.google.com/rss/search?q=bitcoin+defi",
-  "https://news.google.com/rss/search?q=btc+defi",
-  "https://news.google.com/rss/search?q=bitcoin+staking",
+  // Staking & Restaking
   "https://news.google.com/rss/search?q=babylon+bitcoin",
+  "https://news.google.com/rss/search?q=lombard+bitcoin",
+  "https://news.google.com/rss/search?q=solv+bitcoin",
+  "https://news.google.com/rss/search?q=bitcoin+staking",
+  "https://news.google.com/rss/search?q=bitcoin+restaking",
+
+  // Bitcoin L2s
   "https://news.google.com/rss/search?q=botanix+bitcoin",
   "https://news.google.com/rss/search?q=rootstock+bitcoin",
   "https://news.google.com/rss/search?q=stacks+bitcoin",
-  "https://news.google.com/rss/search?q=tbtc+bitcoin",
-  "https://news.google.com/rss/search?q=lombard+bitcoin",
-  "https://news.google.com/rss/search?q=solv+bitcoin"
+  "https://news.google.com/rss/search?q=bitlayer+bitcoin",
+  "https://news.google.com/rss/search?q=bob+build+on+bitcoin",
+  "https://news.google.com/rss/search?q=merlin+chain+bitcoin",
+  "https://news.google.com/rss/search?q=mezo+bitcoin",
+  "https://news.google.com/rss/search?q=core+dao+bitcoin",
+
+  // Bridges & Wrapped BTC
+  "https://news.google.com/rss/search?q=tbtc+threshold",
+  "https://news.google.com/rss/search?q=threshold+network+bitcoin",
+  "https://news.google.com/rss/search?q=wrapped+bitcoin",
+  "https://news.google.com/rss/search?q=wbtc+bitcoin",
+  "https://news.google.com/rss/search?q=cbbtc+bitcoin",
+
+  // Cardano Bitcoin DeFi
+  "https://news.google.com/rss/search?q=rsbtc+cardano",
+  "https://news.google.com/rss/search?q=rosen+bridge+bitcoin",
+  "https://news.google.com/rss/search?q=grail+bridge+cardano",
+  "https://news.google.com/rss/search?q=bitcoin+cardano+defi",
+
+  // Emerging
+  "https://news.google.com/rss/search?q=pogun+bitcoin",
+  "https://news.google.com/rss/search?q=pogun+cardano"
 ];
 
 export async function GET() {
