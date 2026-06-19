@@ -13,7 +13,7 @@ type NewsSection = {
 
 async function getNews() {
   const res = await fetch("https://bitcoinxdefi.com/api/news", {
-    next: { revalidate: 60 },
+    next: { revalidate: 3600 },
   });
 
   if (!res.ok) return [];
