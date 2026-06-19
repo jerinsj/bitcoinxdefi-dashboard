@@ -31,11 +31,11 @@ import {
 } from "recharts";
 
 const news = [
-  "Bitcoin DeFi liquidity rises as L2 ecosystems expand.",
-  "BTC staking protocols attract renewed institutional attention.",
-  "Wrapped BTC supply remains the largest source of Bitcoin DeFi liquidity.",
-  "Security risk remains highest around bridges, custody, and oracle design.",
-  "Cardano/BOS Bitcoin interoperability remains a watchlist category."
+  "Babylon hits $5B in staked BTC and partners with Aave for native BTC lending.",
+  "Bitcoin yield products continue gaining traction across staking ecosystems.",
+  "BOB (Build on Bitcoin) remains one of the most active Bitcoin L2 ecosystems.",
+  "cbBTC expansion continues to increase Bitcoin liquidity across DeFi platforms.",
+  "View full Bitcoin DeFi news feed on News page."
 ];
 
 function StatCard({
