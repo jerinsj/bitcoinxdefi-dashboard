@@ -332,16 +332,16 @@ export default function HomePage() {
   {protocols.map((p) => (
   <tr key={p.name} className="border-t border-slate-100">
     <td className="p-4">
-      <div className="font-semibold text-slate-950">
-        {p.name}
+      <div className="font-semibold text-slate-950 dark:text-white">
+      {p.name}
       </div>
 
-      <div className="text-xs text-slate-500">
+      <div className="text-xs text-slate-500 dark:text-slate-400">
         {p.chains?.join(", ")}
       </div>
     </td>
 
-    <td className="p-4 text-slate-600">
+    <td className="p-4 text-slate-600 dark:text-slate-300">
       {p.category}
     </td>
 
@@ -373,9 +373,11 @@ export default function HomePage() {
           </Card>
 
           <div className="space-y-5">
-            <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+            <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold">Market Signals</h3>
+                <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                Market Signals
+                </h3>
                 <div className="mt-4 space-y-3">
                   {news.map((item) => (
                     <div
