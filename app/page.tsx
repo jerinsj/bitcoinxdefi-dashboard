@@ -164,10 +164,9 @@ export default function HomePage() {
         About
       </a>
 
-      <a href="/methodology" className="hover:text-slate-950">
-    Methodology
-     </a>   
-             <a href="/news" className="hover:text-slate-950"> BTC Defi News </a>
+      <a href="/methodology" className="hover:text-slate-950"> Methodology </a>  
+        <a href="/news" className="hover:text-slate-950"> BTC Defi News </a>
+           <a href="/cardano-bitcoin" className="hover:text-slate-950"> Cardano BTC </a>  
     </nav>
           {/* <Button className="rounded-2xl">
             Launch App <ArrowUpRight className="ml-2 h-4 w-4" />
