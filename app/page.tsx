@@ -140,7 +140,7 @@ export default function HomePage() {
   const categories = ["All", ...Array.from(new Set(protocols.map((p) => p.category)))];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950">
+<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black dark:text-white">
      
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
