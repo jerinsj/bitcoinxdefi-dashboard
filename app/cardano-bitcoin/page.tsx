@@ -54,7 +54,7 @@ const pools = [
 
 export default function CardanoBitcoinPage() {
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950">
+    <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
       <div className="mx-auto max-w-7xl space-y-8">
         <section className="flex flex-col justify-between gap-6 lg:flex-row">
           <div>
@@ -91,7 +91,7 @@ export default function CardanoBitcoinPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border bg-white p-6 shadow-sm lg:w-[380px]">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:w-[380px]">
             <h2 className="text-xl font-bold">Cardano & Bitcoin</h2>
 
             <p className="mt-2 text-slate-600">
@@ -128,7 +128,7 @@ export default function CardanoBitcoinPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-3">
-          <div className="rounded-2xl border bg-white shadow-sm lg:col-span-2">
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:col-span-2">
             <div className="border-b p-6">
               <h2 className="text-2xl font-bold">
                 Bitcoin Assets on Cardano
@@ -201,7 +201,7 @@ export default function CardanoBitcoinPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <h2 className="text-xl font-bold">
               Total BTC on Cardano
             </h2>
@@ -233,7 +233,7 @@ export default function CardanoBitcoinPage() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-3">
-          <div className="rounded-2xl border bg-white shadow-sm lg:col-span-2">
+          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:col-span-2">
             <div className="border-b p-5">
               <h2 className="text-xl font-bold">
                 Top BTC/ADA Liquidity Pools on Cardano
@@ -275,7 +275,7 @@ export default function CardanoBitcoinPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <h2 className="text-xl font-bold">Methodology</h2>
 
             <p className="mt-4 text-slate-600">
@@ -301,7 +301,7 @@ function Metric({
   sub: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <p className="text-sm text-slate-500">{title}</p>
 
       <p className="mt-3 text-3xl font-bold">{value}</p>
