@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
@@ -18,9 +19,14 @@ export default function RootLayout({
         <header className="border-b border-slate-200 bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-2xl font-black text-orange-600">
-                ₿
-              </div>
+              <Image
+                  src="/btcxdefilogo.png"
+                  alt="BitcoinXDeFi"
+                  width={48}
+                  height={48}
+                  className="rounded-xl"
+                  priority
+              />
 
               <div>
                 <div className="text-xl font-black text-slate-950">
