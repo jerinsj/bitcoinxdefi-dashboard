@@ -374,19 +374,18 @@ export default function HomePage() {
                 <h3 className="text-lg font-semibold">Market Signals</h3>
                 <div className="mt-4 space-y-3">
                   {news.map((item) => (
-                    <div 
-                      key={item} 
-                      className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                    <div
+                        key={item}
+                        className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
                     >
-                    </div> 
                       {item}
-                    </div>
+                  </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
 
-            {/* <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+            {/* <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3">
                   <Lock className="h-5 w-5 text-slate-700" />
