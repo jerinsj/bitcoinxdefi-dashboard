@@ -374,7 +374,11 @@ export default function HomePage() {
                 <h3 className="text-lg font-semibold">Market Signals</h3>
                 <div className="mt-4 space-y-3">
                   {news.map((item) => (
-                    <div key={item} className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                    <div 
+                      key={item} 
+                      className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                    >
+                    </div> 
                       {item}
                     </div>
                   ))}
