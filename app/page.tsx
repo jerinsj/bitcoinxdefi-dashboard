@@ -292,21 +292,21 @@ export default function HomePage() {
             <CardContent className="p-6">
               <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold">Protocol Watchlist</h3>
-                  <p className="text-sm text-slate-500">Filter BTC DeFi protocols by category and risk</p>
+                  <h3 className="text-lg font-semibold text-slate-950 dark:text-white"> Protocol Watchlist </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Filter BTC DeFi protocols by category and risk</p>
                 </div>
                 <div className="flex gap-3">
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-                    <Input
-                      className="w-52 rounded-2xl pl-9"
-                      placeholder="Search protocol"
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                    />
+                   <Input
+                   className="w-52 rounded-2xl pl-9 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                   placeholder="Search protocol"
+                   value={query}
+                   onChange={(e) => setQuery(e.target.value)}
+                   />
                   </div>
                   <select
-                    className="rounded-2xl border border-slate-200 bg-white px-4 text-sm"
+                    className="rounded-2xl border border-slate-200 bg-white px-4 text-sm dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
