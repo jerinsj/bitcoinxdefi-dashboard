@@ -26,11 +26,11 @@ export default async function NewsPage() {
   const sections: NewsSection[] = await getNews();
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-10">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950 px-6 py-10">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-2">Bitcoin DeFi News Feed</h1>
 
-        <p className="text-gray-400 mb-10">
+        <p className="text-slate-600 mb-10">
           Curated news across Bitcoin staking, Bitcoin L2s, wrapped BTC,
           bridges, and Cardano Bitcoin DeFi.
         </p>
@@ -44,7 +44,7 @@ export default async function NewsPage() {
 
               <div className="space-y-4">
                 {section.articles.length === 0 && (
-                  <p className="text-gray-500">
+                  <p className="text-slate-500">
                     No recent news found for this category.
                   </p>
                 )}
@@ -55,13 +55,13 @@ export default async function NewsPage() {
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-xl border border-gray-800 bg-gray-950 p-5 hover:bg-gray-900 transition"
+                    className="block rounded-xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition shadow-sm"
                   >
                     <h3 className="text-lg font-semibold mb-2">
                       {article.title}
                     </h3>
 
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-slate-500">
                       {article.source} ·{" "}
                       {article.pubDate
                         ? new Date(article.pubDate).toLocaleString()
