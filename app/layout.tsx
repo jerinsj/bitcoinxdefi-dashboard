@@ -1,3 +1,5 @@
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
