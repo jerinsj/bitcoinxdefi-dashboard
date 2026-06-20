@@ -16,51 +16,57 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <header className="border-b border-slate-200 bg-white">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white text-slate-950 dark:bg-slate-950 dark:text-white">
+        <ThemeProvider>
+          <header className="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+              <Link href="/" className="flex items-center gap-3">
+                <Image
                   src="/btcxdefilogo.png"
                   alt="BitcoinXDeFi"
                   width={48}
                   height={48}
                   className="rounded-xl"
                   priority
-              />
+                />
 
-              <div>
-                <div className="text-xl font-black text-slate-950">
-                  BitcoinXDeFi Analytics
+                <div>
+                  <div className="text-xl font-black text-slate-950 dark:text-white">
+                    BitcoinXDeFi Analytics
+                  </div>
+                  <div className="text-sm text-slate-500 dark:text-slate-400">
+                    Bitcoin DeFi, BTC staking, bridge liquidity, Cardano/BOS watchlist, and L2 risk intelligence
+                  </div>
                 </div>
-                <div className="text-sm text-slate-500">
-                  Bitcoin DeFi, BTC staking, bridge liquidity, Cardano/BOS watchlist, and L2 risk intelligence
-                </div>
+              </Link>
+
+              <div className="flex items-center gap-4">
+                <nav className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-300 md:flex">
+                  <Link href="/" className="hover:text-slate-950 dark:hover:text-white">
+                    Dashboard
+                  </Link>
+                  <Link href="/about" className="hover:text-slate-950 dark:hover:text-white">
+                    About
+                  </Link>
+                  <Link href="/methodology" className="hover:text-slate-950 dark:hover:text-white">
+                    Methodology
+                  </Link>
+                  <Link href="/news" className="hover:text-slate-950 dark:hover:text-white">
+                    BTC DeFi News
+                  </Link>
+                  <Link href="/cardano-bitcoin" className="hover:text-slate-950 dark:hover:text-white">
+                    Cardano BTC
+                  </Link>
+                </nav>
+
+                <ThemeToggle />
               </div>
-            </Link>
+            </div>
+          </header>
 
-            <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-              <Link href="/" className="hover:text-slate-950">
-                Dashboard
-              </Link>
-              <Link href="/about" className="hover:text-slate-950">
-                About
-              </Link>
-              <Link href="/methodology" className="hover:text-slate-950">
-                Methodology
-              </Link>
-              <Link href="/news" className="hover:text-slate-950">
-                BTC DeFi News
-              </Link>
-              <Link href="/cardano-bitcoin" className="hover:text-slate-950">
-                Cardano BTC
-              </Link>
-            </nav>
-          </div>
-        </header>
-
-        {children}
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
