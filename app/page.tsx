@@ -50,12 +50,12 @@ function StatCard({
   sub: string;
 }) {
   return (
-    <Card className="rounded-2xl border-slate-200 bg-white/80 shadow-sm">
+    <Card className="rounded-2xl border-slate-200 bg-white/80 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-slate-500">{label}</p>
-            <p className="mt-2 text-2xl font-semibold text-slate-950">{value}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{value}</p>
             <p className="mt-1 text-xs text-slate-500">{sub}</p>
           </div>
           <div className="rounded-2xl bg-slate-100 p-3">
@@ -143,8 +143,8 @@ export default function HomePage() {
 <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black dark:text-white">
      
       <main className="mx-auto max-w-7xl px-6 py-8">
-        <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-    <h2 className="text-lg font-semibold text-slate-900">
+        <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900">
+    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
       Educational Bitcoin DeFi Analytics
     </h2>
 
@@ -185,7 +185,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-slate-700" />
@@ -241,7 +241,7 @@ export default function HomePage() {
         </section>
 
         <section className="mb-8 grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
-          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-6">
               <div className="mb-5 flex items-center justify-between">
                 <div>
@@ -264,7 +264,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold">Wrapped BTC Share</h3>
               <p className="text-sm text-slate-500">Live wrapped BTC market cap distribution</p>
@@ -284,7 +284,7 @@ export default function HomePage() {
         </section>
 
         <section className="grid gap-5 lg:grid-cols-[1.4fr_.6fr]">
-          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm">
+          <Card className="rounded-3xl border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-6">
               <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
@@ -374,7 +374,7 @@ export default function HomePage() {
                 <h3 className="text-lg font-semibold">Market Signals</h3>
                 <div className="mt-4 space-y-3">
                   {news.map((item) => (
-                    <div key={item} className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+                    <div key={item} className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
                       {item}
                     </div>
                   ))}
@@ -399,7 +399,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <footer className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-500">
+        <footer className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
           Educational research only. Not financial advice. No wallet connection required.
         </footer>
       </main>
