@@ -166,7 +166,7 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="mb-8 grid gap-5 lg:grid-cols-[1.4fr_.6fr]"
         >
-          <Card className="rounded-3xl border-slate-200 bg-slate-950 text-white shadow-sm">
+          <Card className="rounded-3xl border-slate-200 bg-slate-950 text-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-8">
               <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/80">
                 <Globe2 className="h-4 w-4" /> bitcoinxdefi.com • bitcoinxdefi.net • bitcoinxdefi.org • bitcoindefi.us
@@ -275,7 +275,11 @@ export default function HomePage() {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="value" radius={[8, 8, 0, 0]} />
+                    <Bar
+                    dataKey="value"
+                    radius={[8, 8, 0, 0]}
+                     fill="#f97316"
+                      />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
