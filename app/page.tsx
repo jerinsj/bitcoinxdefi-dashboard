@@ -141,39 +141,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 text-slate-950">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-3">
-            <div className="rounded-2xl bg-orange-100 p-3">
-              <Bitcoin className="h-7 w-7 text-orange-600" />
-            </div>
-
-            <div>
-              <h1 className="text-xl font-bold tracking-tight">BitcoinXDeFi Analytics</h1>
-              <p className="text-sm text-slate-500">
-                Bitcoin DeFi, BTC staking, bridge liquidity, Cardano/BOS watchlist, and L2 risk intelligence
-              </p>
-            </div>
-          </div>
-           <nav className="flex items-center gap-4 text-sm text-slate-600">
-      <a href="/" className="hover:text-slate-950">
-        Dashboard
-      </a>
-
-      <a href="/about" className="hover:text-slate-950">
-        About
-      </a>
-
-      <a href="/methodology" className="hover:text-slate-950"> Methodology </a>  
-        <a href="/news" className="hover:text-slate-950"> BTC Defi News </a>
-           <a href="/cardano-bitcoin" className="hover:text-slate-950"> Cardano BTC </a>  
-    </nav>
-          {/* <Button className="rounded-2xl">
-            Launch App <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button> */}
-        </div>
-      </header>
-
+     
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
     <h2 className="text-lg font-semibold text-slate-900">
