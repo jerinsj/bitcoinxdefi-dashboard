@@ -53,13 +53,13 @@ export default function RootLayout({
                     Methodology
                   </Link>
                   <Link href="/news" className="hover:text-slate-950 dark:hover:text-white">
-                    BTC DeFi News
+                    News
                   </Link>
                   <Link href="/cardano-bitcoin" className="hover:text-slate-950 dark:hover:text-white">
-                    Cardano BTC
+                    Cardano
                   </Link>
                   <Link href="/five-flags" className="hover:text-slate-950 dark:hover:text-white">
-                    Crypto Tax Tool
+                    Country Screener
                   </Link>
                 </nav>
 
