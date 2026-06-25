@@ -36,7 +36,7 @@ export default function RootLayout({
                     BitcoinXDeFi Analytics
                   </div>
                   <div className="text-sm text-slate-500 dark:text-slate-400">
-                    Bitcoin DeFi, BTC staking, bridge liquidity, Cardano/BOS watchlist, and L2 risk intelligence
+                    Daily Dose of Bitcoin
                   </div>
                 </div>
               </Link>
