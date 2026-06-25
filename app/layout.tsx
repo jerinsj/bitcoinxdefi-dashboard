@@ -58,6 +58,9 @@ export default function RootLayout({
                   <Link href="/cardano-bitcoin" className="hover:text-slate-950 dark:hover:text-white">
                     Cardano BTC
                   </Link>
+                  <Link href="/five-flags" className="hover:text-slate-950 dark:hover:text-white">
+                    Crypto Tax Tool
+                  </Link>
                 </nav>
 
                 <ThemeToggle />
