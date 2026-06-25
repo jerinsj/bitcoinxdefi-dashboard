@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Five Flags — Country Screener</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c4e54'/%3E%3Cpath d='M9 7v18M9 7l13 3-13 3' stroke='%23f7f6f2' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <!-- ========== LOGIN GATE ========== -->
+    <div id="login-gate" class="gate">
+      <div class="gate__card">
+        <div class="gate__logo" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect width="48" height="48" rx="10" fill="var(--color-primary)" />
+            <path d="M14 11v26M14 11l19 4-19 4M14 19l16 3-16 3" stroke="var(--color-text-inverse)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+        </div>
+        <h1 class="gate__title">Five Flags</h1>
+        <p class="gate__subtitle">Private country screener for international residency, taxation, banking & lifestyle research.</p>
+        <form id="login-form" class="gate__form" autocomplete="off">
+          <label for="passcode" class="sr-only">Passcode</label>
+          <input id="passcode" type="password" inputmode="text" placeholder="Enter passcode" autofocus />
+          <button type="submit" class="btn btn--primary">Unlock</button>
+        </form>
+        <div id="login-error" class="gate__error" hidden>Incorrect passcode.</div>
+        <div class="gate__hint">Default passcode is <code>fiveflags</code>. You can change it in <code>app.js</code>.</div>
+      </div>
+    </div>
+
+    <!-- ========== APP SHELL ========== -->
+    <div id="app" class="app" hidden>
+      <header class="topbar">
+        <div class="topbar__brand">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect width="48" height="48" rx="10" fill="var(--color-primary)" />
+            <path d="M14 11v26M14 11l19 4-19 4M14 19l16 3-16 3" stroke="var(--color-text-inverse)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+          <div>
+            <div class="topbar__title">Five Flags</div>
+            <div class="topbar__subtitle">Country Screener</div>
+          </div>
+        </div>
+        <nav class="topbar__nav">
+          <button class="tab active" data-view="screener">Screener</button>
+          <button class="tab" data-view="chart">Charts</button>
+          <button class="tab" data-view="detail">Detail</button>
+          <button class="tab" data-view="about">About</button>
+        </nav>
+        <div class="topbar__actions">
+          <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <button class="icon-btn" id="logout-btn" aria-label="Lock">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ========== SCREENER VIEW ========== -->
+      <main id="view-screener" class="view">
+        <aside class="sidebar">
+          <!-- Search & filters -->
+          <section class="panel">
+            <header class="panel__h">
+              <h2>Filters</h2>
+              <button class="link-btn" id="reset-filters">Reset</button>
+            </header>
+            <div class="field">
+              <label for="search">Search</label>
+              <input id="search" type="search" placeholder="Country or tag…" />
+            </div>
+            <div class="field">
+              <label>Region</label>
+              <div id="region-chips" class="chips"></div>
+            </div>
+            <div class="field">
+              <label>Tax model</label>
+              <div id="tag-chips" class="chips chips--sm"></div>
+            </div>
+            <div class="field">
+              <label>Minimum scores</label>
+              <div id="min-sliders"></div>
+            </div>
+          </section>
+
+          <!-- Weights -->
+          <section class="panel">
+            <header class="panel__h">
+              <h2>Flag weights</h2>
+              <button class="link-btn" id="reset-weights">Equal</button>
+            </header>
+            <p class="panel__desc">Adjust how much each dimension contributes to the overall score.</p>
+            <div id="weight-sliders"></div>
+            <div class="weight-sum">
+              <span>Sum</span><span id="weight-sum-val">100</span>
+            </div>
+          </section>
+
+          <!-- Export -->
+          <section class="panel">
+            <header class="panel__h">
+              <h2>Export</h2>
+            </header>
+            <div class="export-row">
+              <button class="btn btn--ghost" id="export-csv">CSV</button>
+              <button class="btn btn--ghost" id="export-xlsx">Excel</button>
+              <button class="btn btn--ghost" id="export-pdf">PDF</button>
+            </div>
+          </section>
+        </aside>
+
+        <section class="content">
+          <div class="content__head">
+            <div>
+              <h1 class="page-title">Screener</h1>
+              <p class="page-sub"><span id="result-count">0</span> countries · weighted overall score</p>
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" data-layout="table">Table</button>
+              <button class="view-btn" data-layout="grid">Grid</button>
+            </div>
+          </div>
+
+          <div class="table-wrap" id="table-wrap">
+            <table class="datatable" id="datatable">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="grid-wrap" id="grid-wrap" hidden></div>
+        </section>
+      </main>
+
+      <!-- ========== CHART VIEW ========== -->
+      <main id="view-chart" class="view" hidden>
+        <div class="content content--wide">
+          <div class="content__head">
+            <div>
+              <h1 class="page-title">Charts</h1>
+              <p class="page-sub">Visualize and compare flag profiles across countries.</p>
+            </div>
+          </div>
+          <div class="chart-grid">
+            <div class="card">
+              <header class="card__h">
+                <h3>Top countries by overall score</h3>
+                <span class="muted">weighted</span>
+              </header>
+              <div class="chart-box chart-box--tall"><canvas id="bar-chart"></canvas></div>
+            </div>
+            <div class="card">
+              <header class="card__h">
+                <h3>Compare profiles (radar)</h3>
+                <div id="compare-picker" class="compare-picker"></div>
+              </header>
+              <div class="chart-box chart-box--tall"><canvas id="radar-chart"></canvas></div>
+            </div>
+            <div class="card card--full">
+              <header class="card__h">
+                <h3>Score distribution by region</h3>
+              </header>
+              <div class="chart-box chart-box--short"><canvas id="region-chart"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- ========== DETAIL VIEW ========== -->
+      <main id="view-detail" class="view" hidden>
+        <div class="content content--wide">
+          <div class="content__head">
+            <div>
+              <h1 class="page-title">Country detail</h1>
+              <p class="page-sub">Pick a country for a full breakdown.</p>
+            </div>
+            <select id="detail-picker" class="select"></select>
+          </div>
+          <div id="detail-body"></div>
+        </div>
+      </main>
+
+      <!-- ========== ABOUT VIEW ========== -->
+      <main id="view-about" class="view" hidden>
+        <div class="content content--narrow">
+          <h1 class="page-title">About this tool</h1>
+          <div class="prose">
+            <p>This is a private screener for applying <strong>Five Flags Theory</strong> to practical residency and tax planning. The original "five flags" are citizenship, legal residence, business base, asset haven, and playground — expanded here into eight measurable dimensions.</p>
+
+            <h3>Dimensions</h3>
+            <ul id="about-dimensions"></ul>
+
+            <h3>Methodology</h3>
+            <p>Each country is scored 1-10 on every dimension. Scores are directional estimates based on public regulatory sources (OECD CRS participant lists, Henley Passport Index 2025/26, national tax authority publications, Nomad Capitalist rankings, CoinGecko regulatory trackers, Numbeo lifestyle indices).</p>
+            <p>The overall score is a weighted average — adjust weights in the sidebar to match your priorities. A tax-focused flag planner might weigh <em>Territorial/Tax Rate</em> at 30% and <em>Travel</em> at 5%; a digital nomad might do the inverse.</p>
+
+            <h3>Important caveats</h3>
+            <ul>
+              <li>Regulations change frequently. Verify with a qualified advisor before taking action.</li>
+              <li>CRS scores reward <em>low exposure</em> — not useful if you're fully tax-compliant.</li>
+              <li>US citizens remain on citizenship-based taxation regardless of residence (FATCA applies everywhere).</li>
+              <li>Visa-free counts are for the country's <em>passport</em>, not residents-on-other-passports.</li>
+            </ul>
+
+            <h3>Keyboard shortcuts</h3>
+            <ul>
+              <li><kbd>/</kbd> focus search</li>
+              <li><kbd>1</kbd>–<kbd>4</kbd> switch views</li>
+              <li><kbd>Esc</kbd> clear search / lock</li>
+            </ul>
+
+            <p class="muted">Last dataset update: April 2026. Passcode and weights are stored in memory only — reset on lock.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ========== DEPENDENCIES ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- ========== APP ========== -->
+    <script src="data/countries.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
