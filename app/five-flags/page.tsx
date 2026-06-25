@@ -2,8 +2,8 @@ import { cookies } from "next/headers";
 import PasscodeForm from "./passcode-form";
 
 export default function FiveFlagsPage() {
-  const cookieStore = cookies();
-  const hasAccess = cookieStore.get("five_flags_access")?.value === "true";
+  const hasAccess =
+    cookies().get("five_flags_access")?.value === "true";
 
   if (!hasAccess) {
     return <PasscodeForm />;
