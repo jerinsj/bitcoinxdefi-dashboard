@@ -166,12 +166,12 @@ export default function HomePage() {
           transition={{ duration: 0.5 }}
           className="mb-8 grid gap-5 lg:grid-cols-[1.4fr_.6fr]"
         >
-          <Card className="rounded-3xl border-slate-200 bg-slate-950 text-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <Card className="rounded-3xl border-slate-200 bg-white text-slate-950 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-white">
             <CardContent className="p-8">
              <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-700 dark:bg-white/10 dark:text-white/80">
               <Globe2 className="h-4 w-4" /> bitcoinxdefi.com • bitcoinxdefi.net • bitcoinxdefi.org • bitcoindefi.us
              </div>
-              <h2 className="max-w-3xl text-4xl font-bold tracking-tight md:text-5xl">
+              <h2 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 dark:text-white md:text-5xl">
                 Track where Bitcoin liquidity is moving inside DeFi.
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
