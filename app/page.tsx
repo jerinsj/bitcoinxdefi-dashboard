@@ -174,7 +174,7 @@ export default function HomePage() {
               <h2 className="max-w-3xl text-4xl font-bold tracking-tight md:text-5xl">
                 Track where Bitcoin liquidity is moving inside DeFi.
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
+              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
                 A dashboard concept for monitoring BTC-backed protocols, wrapped Bitcoin supply, L2 activity,
                 staking narratives, bridge concentration, Cardano/BOS developments, and protocol risk.
               </p>
