@@ -4,7 +4,7 @@
    ============================================================ */
 
 // ------------ CONFIG ------------
-const PASSCODE = 'fiveflags'; // Change this to your preferred passcode.
+
 const STATE = {
   weights: { ...window.DEFAULT_WEIGHTS },
   mins: Object.fromEntries(window.DIMENSIONS.map(d => [d.key, 0])),
@@ -139,32 +139,6 @@ function taxSeverity(value) {
   const m = v.match(/(\d{2,3})\s*%/);
   if (m && parseInt(m[1], 10) >= 30) return 'tax-heavy';
   return 'tax-some';
-}
-
-// ------------ LOGIN GATE ------------
-function setupLogin() {
-  const form = $('#login-form');
-  const input = $('#passcode');
-  const err = $('#login-error');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (input.value.trim().toLowerCase() === PASSCODE.toLowerCase()) {
-      $('#login-gate').hidden = true;
-      $('#app').hidden = false;
-      bootApp();
-    } else {
-      err.hidden = false;
-      input.value = '';
-      input.focus();
-    }
-  });
-  $('#logout-btn').addEventListener('click', () => {
-    $('#app').hidden = true;
-    $('#login-gate').hidden = false;
-    err.hidden = true;
-    input.value = '';
-    input.focus();
-  });
 }
 
 // ------------ THEME TOGGLE ------------
@@ -1040,6 +1014,6 @@ function bootApp() {
 
 // Initialize login gate (runs immediately)
 document.addEventListener('DOMContentLoaded', () => {
-  setupLogin();
   setupTheme();
+  bootApp();
 });
