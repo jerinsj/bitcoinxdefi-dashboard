@@ -16,6 +16,5 @@ export const cardanoBtcAssets = [
     decimals: 8,
     source: "Wanchain",
     trackingMethod: "assetSupply",
-    excludedAddresses: [],
   },
 ] as const;
