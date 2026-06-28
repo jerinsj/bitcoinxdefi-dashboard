@@ -1,0 +1,54 @@
+import { Bitcoin, CircleDot } from "lucide-react";
+
+export function DashboardHero() {
+  return (
+    <section className="flex flex-col justify-between gap-6 lg:flex-row">
+      <div>
+        <p className="text-sm font-bold uppercase tracking-wide text-orange-500">
+          Cardano Bitcoin DeFi
+        </p>
+
+        <h1 className="mt-3 text-4xl font-bold md:text-5xl">
+          Cardano Bitcoin DeFi Dashboard
+        </h1>
+
+        <p className="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+          Tracking Bitcoin liquidity, bridges, staking, and DeFi activity
+          connected to Cardano.
+        </p>
+
+        <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/40">
+          <h3 className="font-semibold text-amber-900 dark:text-amber-300">
+            Live Data Beta
+          </h3>
+
+          <p className="mt-1 text-sm text-amber-800 dark:text-amber-200">
+            This Version 2 dashboard is under development. Live data will be
+            connected from the existing BitcoinXDeFi APIs.
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:w-[380px]">
+        <h2 className="text-xl font-bold">Cardano & Bitcoin</h2>
+
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          Building a stronger DeFi future by connecting Bitcoin liquidity to
+          Cardano.
+        </p>
+
+        <div className="mt-6 flex items-center justify-center gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-orange-500 bg-orange-500/10 text-orange-500">
+            <Bitcoin size={34} />
+          </div>
+
+          <div className="h-px w-12 border-t border-dashed border-slate-400 dark:border-slate-600" />
+
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 text-blue-400">
+            <CircleDot size={34} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
