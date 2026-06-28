@@ -66,11 +66,28 @@ export default async function CardanoBitcoinPage() {
             sub="rsBTC and wanBTC"
           />
 
-          <Metric
-            title="Last Updated"
-            value={new Date(data.updatedAt).toLocaleDateString()}
-            sub={new Date(data.updatedAt).toLocaleTimeString()}
-          />
+          {(() => {
+  const snapshot = new Date(data.updatedAt);
+
+  return (
+    <Metric
+      title="Data Snapshot"
+      value={snapshot.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: "UTC",
+      })}
+      sub={snapshot.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "UTC",
+        timeZoneName: "short",
+      })}
+    />
+  );
+})()}
         </section>
 
         <section className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
