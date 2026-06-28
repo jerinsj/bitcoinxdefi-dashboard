@@ -1,3 +1,4 @@
+import { BitcoinAssetsTable } from "@/components/cardano-bitcoin-v2/BitcoinAssetsTable";
 import { KpiCards } from "@/components/cardano-bitcoin-v2/KpiCards";
 import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
@@ -51,6 +52,10 @@ const chartData = buildChartData(dashboard.totalTrackedBtc);
         updatedAt={dashboard.updatedAt}
         />
         <LiquidityChart data={chartData} />
+        <BitcoinAssetsTable
+        assets={dashboard.cardano.assets}
+        formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
+        />
       </div>
     </main>
   );
