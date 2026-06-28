@@ -45,13 +45,14 @@ const chartData = buildChartData(dashboard.totalTrackedBtc);
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
       <div className="mx-auto max-w-7xl space-y-8">
         <DashboardHero />
-        <KpiCards
-        totalTrackedBtc={dashboard.totalTrackedBtc}
-        protocolCount={dashboard.protocolCount}
-        totalTvlUsd={dashboard.totalTvlUsd}
-        updatedAt={dashboard.updatedAt}
-        />
         <LiquidityChart data={chartData} />
+        <KpiCards
+          totalTrackedBtc={dashboard.totalTrackedBtc}
+          protocolCount={dashboard.protocolCount}
+          totalTvlUsd={dashboard.totalTvlUsd}
+          totalHolders={dashboard.totalHolders}
+          updatedAt={dashboard.updatedAt}
+        />
         <BitcoinAssetsTable
         assets={dashboard.cardano.assets}
         formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
