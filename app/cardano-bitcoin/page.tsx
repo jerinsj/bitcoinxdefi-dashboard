@@ -10,8 +10,21 @@ async function getCardanoBitcoinData() {
   return res.json();
 }
 
+async function getBtcKarmaData() {
+  const res = await fetch("https://bitcoinxdefi.com/api/btc-karma", {
+    next: { revalidate: 604800 },
+  });
+
+  if (!res.ok) {
+    return null;
+  }
+
+  return res.json();
+}
+
 export default async function CardanoBitcoinPage() {
   const data = await getCardanoBitcoinData();
+  const karma = await getBtcKarmaData();
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
@@ -67,27 +80,27 @@ export default async function CardanoBitcoinPage() {
           />
 
           {(() => {
-  const snapshot = new Date(data.updatedAt);
+            const snapshot = new Date(data.updatedAt);
 
-  return (
-    <Metric
-      title="Data Snapshot"
-      value={snapshot.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: "UTC",
-      })}
-      sub={snapshot.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-        timeZone: "UTC",
-        timeZoneName: "short",
-      })}
-    />
-  );
-})()}
+            return (
+              <Metric
+                title="Data Snapshot"
+                value={snapshot.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: "UTC",
+                })}
+                sub={snapshot.toLocaleTimeString("en-US", {
+                  hour: "numeric",
+                  minute: "2-digit",
+                  hour12: true,
+                  timeZone: "UTC",
+                  timeZoneName: "short",
+                })}
+              />
+            );
+          })()}
         </section>
 
         <section className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -151,12 +164,57 @@ export default async function CardanoBitcoinPage() {
           </div>
         </section>
 
+        {karma && (
+          <section className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div className="border-b border-slate-200 p-6 dark:border-slate-800">
+              <h2 className="text-2xl font-bold">BTC Karma Protocol</h2>
+
+              <p className="mt-1 text-slate-600 dark:text-slate-300">
+                Public dashboard metrics for BTC Karma staking activity.
+              </p>
+            </div>
+
+            <div className="grid gap-5 p-6 md:grid-cols-4">
+              <Metric
+                title="BTC Staked"
+                value={`${karma.formattedTotalBtcStaked} BTC`}
+                sub="Protocol reported"
+              />
+
+              <Metric
+                title="TVL"
+                value={karma.formattedTvlUsd}
+                sub="Based on BTC price"
+              />
+
+              <Metric
+                title="Unique Wallets"
+                value={String(karma.uniqueWallets)}
+                sub="BTC Karma dashboard"
+              />
+
+              <Metric
+                title="Positions"
+                value={String(karma.totalPositions)}
+                sub="Active + inactive"
+              />
+            </div>
+          </section>
+        )}
+
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <h2 className="text-xl font-bold">Methodology</h2>
 
           <p className="mt-4 text-slate-600 dark:text-slate-300">
             {data.note}
           </p>
+
+          {karma && (
+            <p className="mt-3 text-slate-600 dark:text-slate-300">
+              BTC Karma data is sourced from the public BTC Karma dashboard and
+              cached weekly.
+            </p>
+          )}
         </section>
       </div>
     </main>
