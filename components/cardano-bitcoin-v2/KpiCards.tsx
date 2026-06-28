@@ -10,12 +10,14 @@ type KpiCardsProps = {
   totalTrackedBtc: number;
   protocolCount: number;
   totalTvlUsd: number;
+  totalHolders: number;
   updatedAt: string;
 };
 
 export function KpiCards({
   totalTrackedBtc,
   protocolCount,
+  totalHolders,
   totalTvlUsd,
   updatedAt,
 }: KpiCardsProps) {
