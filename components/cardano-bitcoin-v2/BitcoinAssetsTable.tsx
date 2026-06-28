@@ -73,9 +73,7 @@ export function BitcoinAssetsTable({
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-500/40 bg-orange-500/10 text-xl">
-                      {assetIcon(asset.symbol)}
-                    </div>
+                    <AssetIcon src={asset.icon} symbol={asset.symbol} />
 
                     <div>
                       <p className="font-bold text-slate-950 dark:text-white">
