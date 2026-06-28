@@ -11,6 +11,7 @@ type KpiCardsProps = {
   protocolCount: number;
   totalTvlUsd: number;
   totalHolders: number;
+  liquidityChange: number;
   updatedAt: string;
 };
 
@@ -18,6 +19,7 @@ export function KpiCards({
   totalTrackedBtc,
   protocolCount,
   totalHolders,
+  liquidityChange,
   totalTvlUsd,
   updatedAt,
 }: KpiCardsProps) {
@@ -30,7 +32,7 @@ export function KpiCards({
         value={`${totalTrackedBtc.toLocaleString(undefined, {
           maximumFractionDigits: 8,
         })} BTC`}
-        sub="+8.71% vs 30 days ago"
+        sub={`${liquidityChange >= 0 ? "+" : ""}${liquidityChange.toFixed(2)}% vs 90 days ago`}
         icon={Bitcoin}
         iconColor="text-orange-500"
         borderColor="border-orange-500/40"
