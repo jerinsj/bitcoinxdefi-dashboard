@@ -67,16 +67,20 @@ export default async function CardanoBitcoinPage() {
         </section>
 
         <section className="grid gap-5 md:grid-cols-3">
-          <Metric
-            title="Total BTC on Cardano"
-            value={`${data.formattedTotalBtc} BTC`}
-            sub="rsBTC estimated + wanBTC verified"
-          />
+         <Metric
+        title="Tracked Bitcoin Liquidity"
+        value={`${(
+        data.totalBtc + (karma?.totalBtcStaked ?? 0)
+        ).toLocaleString(undefined, {
+        maximumFractionDigits: 8,
+        })} BTC`}
+        sub="Cardano assets + BTC Karma"
+        />
 
           <Metric
-            title="Tracked BTC Assets"
-            value={String(data.assets.length)}
-            sub="rsBTC and wanBTC"
+          title="Tracked Protocols"
+          value={String(data.assets.length + (karma ? 1 : 0))}
+          sub="rsBTC, wanBTC and BTC Karma"
           />
 
           {(() => {
