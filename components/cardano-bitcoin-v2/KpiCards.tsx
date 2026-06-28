@@ -49,7 +49,7 @@ export function KpiCards({
 
       <KpiCard
         title="Total BTC Holders"
-        value="40"
+        value={String(totalHolders)}
         sub="Across all tracked assets"
         icon={Users}
         iconColor="text-violet-500"
@@ -98,25 +98,25 @@ function KpiCard({
   bgColor: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-sm">
-      <div className="flex items-start gap-4">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3.5 shadow-sm">
+    <div className="flex items-center gap-3">
         <div
-          className={`flex h-12 w-12 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
+         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
         >
-          <Icon className={`h-6 w-6 ${iconColor}`} />
+          <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
 
         <div className="flex-1">
-          <p className="text-sm text-slate-400">
+          <p className="text-xs text-slate-400">
             {title}
           </p>
 
-          <p className="mt-2 text-3xl font-bold text-white">
+          <p className="mt-1 text-xl font-bold leading-tight text-white">
             {value}
           </p>
 
           <p
-            className={`mt-2 text-sm ${
+            className={`mt-1 text-xs ${
               sub.startsWith("+")
                 ? "text-green-400"
                 : "text-slate-400"
