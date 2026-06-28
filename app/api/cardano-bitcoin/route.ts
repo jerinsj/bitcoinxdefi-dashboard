@@ -15,7 +15,7 @@ async function fetchAssetSupply(assetId: string, projectId: string) {
     `https://cardano-mainnet.blockfrost.io/api/v0/assets/${assetId}`,
     {
       headers: { project_id: projectId },
-      next: { revalidate: 300 },
+      next: { revalidate: 604800 },
     }
   );
 
@@ -36,7 +36,7 @@ async function fetchAllAssetHolders(assetId: string, projectId: string) {
       `https://cardano-mainnet.blockfrost.io/api/v0/assets/${assetId}/addresses?count=100&page=${page}&order=desc`,
       {
         headers: { project_id: projectId },
-        next: { revalidate: 300 },
+        next: { revalidate: 604800 },
       }
     );
 
@@ -75,6 +75,7 @@ export async function GET() {
         let rawCirculatingSupply = rawTotalSupply;
         let rawExcludedBalance = 0;
         let holderCount: number | null = null;
+        let largestHolderAddress: string | null = null;
         let methodology = "Verified on-chain asset supply";
 
         if (asset.trackingMethod === "holderAdjusted") {
@@ -82,18 +83,26 @@ export async function GET() {
 
           holderCount = holders.length;
 
-          const excludedSet = new Set<string>(asset.excludedAddresses as readonly string[]);
+          const totalHolderBalance = holders.reduce(
+            (sum, holder) => sum + Number(holder.quantity),
+            0
+          );
 
-          rawExcludedBalance = holders
-            .filter((holder) => excludedSet.has(holder.address))
-            .reduce((sum, holder) => sum + Number(holder.quantity), 0);
+          const largestHolder = [...holders].sort(
+            (a, b) => Number(b.quantity) - Number(a.quantity)
+          )[0];
 
-          rawCirculatingSupply = holders
-            .filter((holder) => !excludedSet.has(holder.address))
-            .reduce((sum, holder) => sum + Number(holder.quantity), 0);
+          rawExcludedBalance = largestHolder
+            ? Number(largestHolder.quantity)
+            : 0;
+
+          largestHolderAddress = largestHolder?.address ?? null;
+
+          rawCirculatingSupply =
+            totalHolderBalance - rawExcludedBalance;
 
           methodology =
-            "Estimated from holder balances excluding known treasury/reserve addresses";
+            "Estimated from holder balances excluding the largest holder, assumed to be treasury/reserve";
         }
 
         const totalSupply = rawTotalSupply / 10 ** asset.decimals;
@@ -109,6 +118,7 @@ export async function GET() {
           trackingMethod: asset.trackingMethod,
           methodology,
           holderCount,
+          largestHolderAddress,
           totalSupply,
           circulatingSupply,
           excludedBalance,
@@ -138,7 +148,7 @@ export async function GET() {
         maximumFractionDigits: 8,
       }),
       note:
-        "rsBTC is estimated from holder balances excluding known treasury/reserve addresses. wanBTC uses verified on-chain asset supply.",
+        "rsBTC is estimated from holder balances excluding the largest holder, assumed to be treasury/reserve. wanBTC uses verified on-chain asset supply.",
       updatedAt: new Date().toISOString(),
     });
   } catch {
