@@ -1,5 +1,3 @@
-import { Bitcoin, CircleDot } from "lucide-react";
-
 export function DashboardHero() {
   return (
     <section className="flex flex-col justify-between gap-6 lg:flex-row">
@@ -38,14 +36,14 @@ export function DashboardHero() {
         </p>
 
         <div className="mt-6 flex items-center justify-center gap-5">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-orange-500 bg-orange-500/10 text-orange-500">
-            <Bitcoin size={34} />
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-orange-500 bg-orange-500/10 text-3xl font-bold text-orange-500">
+            ₿
           </div>
 
           <div className="h-px w-12 border-t border-dashed border-slate-400 dark:border-slate-600" />
 
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 text-blue-400">
-            <CircleDot size={34} />
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 text-2xl font-bold text-blue-400">
+            ₳
           </div>
         </div>
       </div>
