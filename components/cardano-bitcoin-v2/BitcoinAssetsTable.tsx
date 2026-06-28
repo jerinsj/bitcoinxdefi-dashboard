@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type BitcoinAsset = {
   symbol: string;
   name: string;
@@ -10,6 +12,26 @@ type BitcoinAsset = {
   totalSupply: number;
   holderCount: number | null;
 };
+
+function AssetIcon({
+  src,
+  symbol,
+}: {
+  src?: string;
+  symbol: string;
+}) {
+  return (
+    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-slate-950">
+      <Image
+        src={src ?? "/icons/bitcoin.png"}
+        alt={`${symbol} logo`}
+        width={28}
+        height={28}
+        className="rounded-full"
+      />
+    </div>
+  );
+}
 
 export function BitcoinAssetsTable({
   assets,
@@ -67,7 +89,7 @@ export function BitcoinAssetsTable({
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <AssetIcon src={asset.icon} symbol={asset.symbol} />
+                    <AssetIcon src={asset.logo} symbol={asset.symbol} />
 
                     <div>
                       <p className="font-bold text-slate-950 dark:text-white">
