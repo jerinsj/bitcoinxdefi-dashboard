@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
-
 function buildChartData(currentTotal: number) {
   return Array.from({ length: 90 }, (_, index) => {
     const today = new Date();
