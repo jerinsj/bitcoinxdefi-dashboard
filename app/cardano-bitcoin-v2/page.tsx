@@ -55,6 +55,7 @@ const liquidityChange =
           protocolCount={dashboard.protocolCount}
           totalTvlUsd={dashboard.totalTvlUsd}
           totalHolders={dashboard.totalHolders}
+          liquidityChange={liquidityChange}
           updatedAt={dashboard.updatedAt}
         />
         <BitcoinAssetsTable
