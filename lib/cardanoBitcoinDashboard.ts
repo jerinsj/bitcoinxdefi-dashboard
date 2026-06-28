@@ -22,6 +22,8 @@ export async function getCardanoBitcoinDashboardData() {
       cardano.totalBtc + (karma?.totalBtcStaked ?? 0),
     protocolCount:
       cardano.assets.length + (karma ? 1 : 0),
+    totalTvlUsd:
+      karma?.tvlUsd ?? 0,
     updatedAt: cardano.updatedAt,
   };
 }
