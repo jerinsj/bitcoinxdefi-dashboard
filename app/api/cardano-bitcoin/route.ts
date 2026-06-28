@@ -115,6 +115,7 @@ export async function GET() {
           symbol: asset.symbol,
           name: asset.name,
           source: asset.source,
+          logo: asset.logo ?? "/icons/bitcoin.png",
           trackingMethod: asset.trackingMethod,
           methodology,
           holderCount,
