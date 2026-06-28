@@ -82,7 +82,7 @@ export async function GET() {
 
           holderCount = holders.length;
 
-          const excludedSet = new Set(asset.excludedAddresses);
+          const excludedSet = new Set<string>(asset.excludedAddresses as readonly string[]);
 
           rawExcludedBalance = holders
             .filter((holder) => excludedSet.has(holder.address))
