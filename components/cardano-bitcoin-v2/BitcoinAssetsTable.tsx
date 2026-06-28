@@ -2,6 +2,7 @@ type BitcoinAsset = {
   symbol: string;
   name: string;
   source: string;
+  logo?: string;
   methodology: string;
   formattedCirculatingSupply: string;
   formattedTotalSupply: string;
