@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
 import { LiquidityChart } from "@/components/cardano-bitcoin-v2/LiquidityChart";
+import { getCardanoBitcoinDashboardData } from "@/lib/cardanoBitcoinDashboard";
 
 export const metadata: Metadata = {
   title: "Cardano Bitcoin DeFi Dashboard V2 | BitcoinXDeFi",
@@ -11,18 +12,6 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
-
-async function getCardanoBitcoinData() {
-  const res = await fetch("https://bitcoinxdefi.com/api/cardano-bitcoin", {
-    next: { revalidate: 604800 },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch Cardano Bitcoin data");
-  }
-
-  return res.json();
-}
 
 function buildChartData(currentTotal: number) {
   return Array.from({ length: 90 }, (_, index) => {
@@ -47,8 +36,8 @@ function buildChartData(currentTotal: number) {
 }
 
 export default async function CardanoBitcoinV2Page() {
-  const data = await getCardanoBitcoinData();
-  const chartData = buildChartData(data.totalBtc);
+ const dashboard = await getCardanoBitcoinDashboardData();
+const chartData = buildChartData(dashboard.totalTrackedBtc);
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
