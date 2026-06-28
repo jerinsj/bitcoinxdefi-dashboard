@@ -37,13 +37,18 @@ function buildChartData(currentTotal: number) {
 }
 
 export default async function CardanoBitcoinV2Page() {
- const dashboard = await getCardanoBitcoinDashboardData();
-const chartData = buildChartData(dashboard.totalTrackedBtc);
-const firstPoint = chartData[0].totalBtc;
-const lastPoint = chartData[chartData.length - 1].totalBtc;
+  const dashboard = await getCardanoBitcoinDashboardData();
+  const chartData = buildChartData(dashboard.totalTrackedBtc);
 
-const liquidityChange =
-  ((lastPoint - firstPoint) / firstPoint) * 100;  
+  const firstPoint = chartData.at(0);
+  const lastPoint = chartData.at(-1);
+
+  const liquidityChange =
+    firstPoint && lastPoint && firstPoint.totalBtc !== 0
+      ? ((lastPoint.totalBtc - firstPoint.totalBtc) / firstPoint.totalBtc) * 100
+      : 0;
+
+  return (
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
