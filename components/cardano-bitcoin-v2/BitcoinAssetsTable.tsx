@@ -11,12 +11,6 @@ type BitcoinAsset = {
   holderCount: number | null;
 };
 
-function assetIcon(symbol: string) {
-  if (symbol.toLowerCase().includes("rs")) return "🟠";
-  if (symbol.toLowerCase().includes("wan")) return "🔵";
-  return "₿";
-}
-
 export function BitcoinAssetsTable({
   assets,
   formattedTotalBtc,
