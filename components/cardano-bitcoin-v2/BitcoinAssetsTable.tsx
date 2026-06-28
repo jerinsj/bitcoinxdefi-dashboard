@@ -10,6 +10,12 @@ type BitcoinAsset = {
   holderCount: number | null;
 };
 
+function assetIcon(symbol: string) {
+  if (symbol.toLowerCase().includes("rs")) return "🟠";
+  if (symbol.toLowerCase().includes("wan")) return "🔵";
+  return "₿";
+}
+
 export function BitcoinAssetsTable({
   assets,
   formattedTotalBtc,
@@ -45,13 +51,14 @@ export function BitcoinAssetsTable({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
+        <table className="w-full min-w-[900px] text-left text-sm">
           <thead className="border-b border-slate-200 bg-slate-50 text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
             <tr>
               <th className="px-6 py-3">Asset</th>
               <th className="px-6 py-3">Source</th>
               <th className="px-6 py-3">Circulating BTC</th>
               <th className="px-6 py-3">Total Supply</th>
+              <th className="px-6 py-3">30D Change</th>
               <th className="px-6 py-3">Holders</th>
               <th className="px-6 py-3">Methodology</th>
             </tr>
@@ -64,13 +71,19 @@ export function BitcoinAssetsTable({
                 className="border-b border-slate-200 last:border-0 dark:border-slate-800"
               >
                 <td className="px-6 py-4">
-                  <div>
-                    <p className="font-bold text-slate-950 dark:text-white">
-                      {asset.symbol}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {asset.name}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-500/40 bg-orange-500/10 text-xl">
+                      {assetIcon(asset.symbol)}
+                    </div>
+
+                    <div>
+                      <p className="font-bold text-slate-950 dark:text-white">
+                        {asset.symbol}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        {asset.name}
+                      </p>
+                    </div>
                   </div>
                 </td>
 
@@ -78,12 +91,20 @@ export function BitcoinAssetsTable({
                   {asset.source}
                 </td>
 
-                <td className="px-6 py-4 font-semibold text-slate-950 dark:text-white">
-                  {asset.formattedCirculatingSupply} BTC
+                <td className="px-6 py-4">
+                  <p className="font-semibold text-slate-950 dark:text-white">
+                    {asset.formattedCirculatingSupply} BTC
+                  </p>
                 </td>
 
-                <td className="px-6 py-4 text-slate-700 dark:text-slate-300">
-                  {asset.formattedTotalSupply} BTC
+                <td className="px-6 py-4">
+                  <p className="font-semibold text-slate-950 dark:text-white">
+                    {asset.formattedTotalSupply} BTC
+                  </p>
+                </td>
+
+                <td className="px-6 py-4 text-green-600 dark:text-green-400">
+                  ▲ —
                 </td>
 
                 <td className="px-6 py-4 text-slate-700 dark:text-slate-300">
@@ -98,20 +119,31 @@ export function BitcoinAssetsTable({
 
             <tr className="bg-orange-50 font-semibold dark:bg-orange-950/30">
               <td className="px-6 py-4 text-orange-600 dark:text-orange-400">
-                Total
+                Total (All Assets)
               </td>
+
               <td className="px-6 py-4">All tracked assets</td>
+
               <td className="px-6 py-4 text-orange-600 dark:text-orange-400">
                 {formattedTotalBtc} BTC
               </td>
+
               <td className="px-6 py-4">
                 {totalSupply.toLocaleString(undefined, {
                   maximumFractionDigits: 8,
                 })}{" "}
                 BTC
               </td>
-              <td className="px-6 py-4">{totalHolders || "—"}</td>
-              <td className="px-6 py-4">Mixed methodology</td>
+
+              <td className="px-6 py-4 text-green-600 dark:text-green-400">
+                ▲ —
+              </td>
+
+              <td className="px-6 py-4 text-orange-600 dark:text-orange-400">
+                {totalHolders || "—"}
+              </td>
+
+              <td className="px-6 py-4">Mixed</td>
             </tr>
           </tbody>
         </table>
