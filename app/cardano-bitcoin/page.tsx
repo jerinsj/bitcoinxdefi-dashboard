@@ -1,3 +1,33 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cardano Bitcoin Ecosystem Dashboard | BitcoinXDeFi",
+  description:
+    "Track Bitcoin liquidity connected to Cardano, including rsBTC, wanBTC, and BTC Karma protocol metrics.",
+  openGraph: {
+    title: "Cardano Bitcoin Ecosystem Dashboard",
+    description:
+      "Live and estimated Bitcoin liquidity metrics across Cardano BTC assets and related Bitcoin DeFi protocols.",
+    url: "https://bitcoinxdefi.com/cardano-bitcoin",
+    siteName: "BitcoinXDeFi Analytics",
+    images: [
+      {
+        url: "https://bitcoinxdefi.com/og/cardano-bitcoin-dashboard.png",
+        width: 1200,
+        height: 630,
+        alt: "Cardano Bitcoin Ecosystem Dashboard by BitcoinXDeFi",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cardano Bitcoin Ecosystem Dashboard | BitcoinXDeFi",
+    description:
+      "Track Bitcoin liquidity connected to Cardano, including rsBTC, wanBTC, and BTC Karma.",
+    images: ["https://bitcoinxdefi.com/og/cardano-bitcoin-dashboard.png"],
+  },
+};
 async function getCardanoBitcoinData() {
   const res = await fetch("https://bitcoinxdefi.com/api/cardano-bitcoin", {
     next: { revalidate: 604800 },
