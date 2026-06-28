@@ -1,3 +1,4 @@
+import { KpiCards } from "@/components/cardano-bitcoin-v2/KpiCards";
 import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
 import { LiquidityChart } from "@/components/cardano-bitcoin-v2/LiquidityChart";
@@ -43,6 +44,12 @@ const chartData = buildChartData(dashboard.totalTrackedBtc);
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
       <div className="mx-auto max-w-7xl space-y-8">
         <DashboardHero />
+        <KpiCards
+        totalTrackedBtc={dashboard.totalTrackedBtc}
+        protocolCount={dashboard.protocolCount}
+        totalTvlUsd={dashboard.totalTvlUsd}
+        updatedAt={dashboard.updatedAt}
+        />
         <LiquidityChart data={chartData} />
       </div>
     </main>
