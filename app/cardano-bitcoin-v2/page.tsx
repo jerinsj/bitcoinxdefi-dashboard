@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
 import { LiquidityChart } from "@/components/cardano-bitcoin-v2/LiquidityChart";
 import { getCardanoBitcoinDashboardData } from "@/lib/cardanoBitcoinDashboard";
+import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
 export const metadata: Metadata = {
   title: "Cardano Bitcoin DeFi Dashboard V2 | BitcoinXDeFi",
@@ -64,6 +65,7 @@ export default async function CardanoBitcoinV2Page() {
         assets={dashboard.cardano.assets}
         formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
         />
+        <BtcKarmaPanel />
       </div>
     </main>
   );
