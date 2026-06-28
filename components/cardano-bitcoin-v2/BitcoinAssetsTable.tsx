@@ -57,7 +57,7 @@ export function BitcoinAssetsTable({
               <th className="px-6 py-3">Asset</th>
               <th className="px-6 py-3">Source</th>
               <th className="px-6 py-3">Circulating BTC</th>
-              <th className="px-6 py-3">Total Supply</th>
+              <th className="px-6 py-3">Issued Supply</th>
               <th className="px-6 py-3">30D Change</th>
               <th className="px-6 py-3">Holders</th>
               <th className="px-6 py-3">Methodology</th>
