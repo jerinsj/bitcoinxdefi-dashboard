@@ -170,18 +170,23 @@ function toChartPoint(snapshot: CardanoBitcoinHistorySnapshot): CardanoBitcoinCh
 }
 
 export function getCardanoBitcoinHistory(
-  dashboard: DashboardData
+  dashboard: DashboardData,
+  persistedSnapshots: CardanoBitcoinHistorySnapshot[] = []
 ): CardanoBitcoinHistoryResponse {
   const liveSnapshot = createCardanoBitcoinSnapshot(dashboard);
   const seedSnapshots = historySeed as CardanoBitcoinHistorySnapshot[];
-  const mergedSnapshots = mergeSnapshots(seedSnapshots, liveSnapshot);
-  const snapshots = buildBootstrapSeries(mergedSnapshots, liveSnapshot);
+  const baseSnapshots = persistedSnapshots.length > 0 ? persistedSnapshots : seedSnapshots;
+  const mergedSnapshots = mergeSnapshots(baseSnapshots, liveSnapshot);
+  const snapshots =
+    persistedSnapshots.length > 0
+      ? mergedSnapshots
+      : buildBootstrapSeries(mergedSnapshots, liveSnapshot);
 
   return {
     snapshots,
     chartData: snapshots.map(toChartPoint),
     updatedAt: liveSnapshot.updatedAt,
-    source: seedSnapshots.length > 1 ? "live-history" : "seeded-history",
+    source: persistedSnapshots.length > 0 ? "live-history" : "seeded-history",
   };
 }
 
