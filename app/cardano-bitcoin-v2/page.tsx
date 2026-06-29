@@ -27,6 +27,7 @@ export default async function CardanoBitcoinV2Page() {
     getCardanoBitcoinDashboardData(),
     fetchPersistedCardanoBitcoinSnapshots(),
   ]);
+
   const history = getCardanoBitcoinHistory(dashboard, persistedSnapshots);
   const liquidityChange = calculateLiquidityChange(history.chartData, 90);
   const assetChanges = calculateAssetSupplyChanges(history.snapshots, 30);
@@ -35,7 +36,9 @@ export default async function CardanoBitcoinV2Page() {
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-[#020817] dark:text-white">
       <div className="mx-auto max-w-7xl space-y-10">
         <DashboardHero />
+
         <LiquidityChart data={history.chartData} source={history.source} />
+
         <KpiCards
           totalTrackedBtc={dashboard.totalTrackedBtc}
           protocolCount={dashboard.protocolCount}
@@ -44,12 +47,14 @@ export default async function CardanoBitcoinV2Page() {
           liquidityChange={liquidityChange}
           updatedAt={dashboard.updatedAt}
         />
+
         <BitcoinAssetsTable
           assets={dashboard.cardano.assets}
           formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
           btcPriceUsd={dashboard.btcPriceUsd}
           assetChanges={assetChanges}
         />
+
         <BtcKarmaPanel />
       </div>
     </main>
