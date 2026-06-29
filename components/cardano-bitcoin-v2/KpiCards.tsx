@@ -101,7 +101,7 @@ function KpiCard({
   bgColor: string;
 }) {
   return (
-    <div className="rounded-2xl border border-[#1f3148] bg-[#07111f] p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+    <div className="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
       <div className="flex items-center gap-3">
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
@@ -110,19 +110,19 @@ function KpiCard({
         </div>
 
         <div className="flex-1">
-          <p className="text-xs text-slate-400">{title}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400">{title}</p>
 
-          <p className="mt-1 text-xl font-bold leading-tight text-white">
+          <p className="mt-1 text-xl font-bold leading-tight text-slate-950 dark:text-white">
             {value}
           </p>
 
           <p
             className={`mt-1 text-xs ${
               sub.startsWith("+")
-                ? "text-green-400"
+                ? "text-green-600 dark:text-green-400"
                 : sub.startsWith("-")
-                  ? "text-red-400"
-                  : "text-slate-400"
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-slate-500 dark:text-slate-400"
             }`}
           >
             {sub}
