@@ -50,22 +50,22 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
   }, [data, selectedRangeConfig]);
 
   return (
-    <section className="rounded-2xl border border-[#1f3148] bg-[#07111f] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-orange-500">📈</span>
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-slate-950 dark:text-white">
               Total BTC on Cardano
             </h2>
           </div>
 
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-slate-600 dark:text-[#cbd5e1]">
             {selectedRange} liquidity trend based on tracked Cardano BTC assets.
           </p>
         </div>
 
-        <div className="flex rounded-lg border border-[#1f3148] bg-[#030b18] p-1 text-xs">
+        <div className="flex rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs dark:border-[#16263a] dark:bg-[#020d1a]">
           {ranges.map((range) => (
             <button
               key={range.label}
@@ -74,7 +74,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
               className={`rounded-md px-3 py-1 font-semibold transition ${
                 selectedRange === range.label
                   ? "bg-orange-500 text-white"
-                  : "text-slate-400 hover:bg-[#0b1728] hover:text-white"
+                  : "text-slate-500 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-400 dark:hover:bg-[#0b1728] dark:hover:text-white"
               }`}
             >
               {range.label}
@@ -104,24 +104,27 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
             <CartesianGrid
               strokeDasharray="4 4"
               vertical={false}
-              stroke="#1f3148"
-              opacity={0.45}
+              stroke="currentColor"
+              className="text-slate-200 dark:text-[#16263a]"
+              opacity={0.55}
             />
 
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 12, fill: "#94a3b8" }}
+              tick={{ fontSize: 12, fill: "currentColor" }}
               tickLine={false}
               axisLine={false}
               minTickGap={28}
+              className="text-slate-500 dark:text-slate-400"
             />
 
             <YAxis
-              tick={{ fontSize: 12, fill: "#94a3b8" }}
+              tick={{ fontSize: 12, fill: "currentColor" }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(value) => `${value}`}
               width={48}
+              className="text-slate-500 dark:text-slate-400"
             />
 
             <Tooltip
@@ -129,8 +132,8 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
               labelStyle={{ color: "#ffffff" }}
               contentStyle={{
                 borderRadius: "12px",
-                border: "1px solid #1f3148",
-                background: "#07111f",
+                border: "1px solid #16263a",
+                background: "#071220",
                 color: "#ffffff",
               }}
             />
