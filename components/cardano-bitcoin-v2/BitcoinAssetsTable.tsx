@@ -40,7 +40,7 @@ export function BitcoinAssetsTable({
   assets: BitcoinAsset[];
   formattedTotalBtc: string;
 }) {
-  const totalSupply = assets.reduce((sum, asset) => sum + asset.totalSupply, 0);
+  
   const totalHolders = assets.reduce(
     (sum, asset) => sum + (asset.holderCount ?? 0),
     0
@@ -143,12 +143,9 @@ export function BitcoinAssetsTable({
                 {formattedTotalBtc} BTC
               </td>
 
-              <td className="px-6 py-4">
-                {totalSupply.toLocaleString(undefined, {
-                  maximumFractionDigits: 8,
-                })}{" "}
-                BTC
-              </td>
+            <td className="px-6 py-4 text-slate-600 dark:text-slate-300">
+            Asset-specific supplies
+            </td>
 
               <td className="px-6 py-4 text-green-600 dark:text-green-400">
                 ▲ —
