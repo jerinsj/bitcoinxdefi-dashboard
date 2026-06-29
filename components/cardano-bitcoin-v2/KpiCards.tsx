@@ -15,9 +15,18 @@ type KpiCardsProps = {
   updatedAt: string;
 };
 
+function formatUsd(value: number) {
+  return value.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+}
+
 export function KpiCards({
   totalTrackedBtc,
   protocolCount,
+  totalTvlUsd,
   totalHolders,
   liquidityChange,
   updatedAt,
@@ -31,6 +40,7 @@ export function KpiCards({
         value={`${totalTrackedBtc.toLocaleString(undefined, {
           maximumFractionDigits: 8,
         })} BTC`}
+        secondaryValue={formatUsd(totalTvlUsd)}
         sub={`${liquidityChange >= 0 ? "+" : ""}${liquidityChange.toFixed(
           2
         )}% vs 90 days ago`}
@@ -43,7 +53,8 @@ export function KpiCards({
       <KpiCard
         title="Tracked Protocols"
         value={String(protocolCount)}
-        sub="Active protocols"
+        secondaryValue="Assets + protocols"
+        sub="Active tracked entities"
         icon={BarChart3}
         iconColor="text-blue-500"
         borderColor="border-blue-500/40"
@@ -53,6 +64,7 @@ export function KpiCards({
       <KpiCard
         title="Total BTC Holders"
         value={String(totalHolders)}
+        secondaryValue="Wallet count"
         sub="Across all tracked assets"
         icon={Users}
         iconColor="text-violet-500"
@@ -68,12 +80,13 @@ export function KpiCards({
           year: "numeric",
           timeZone: "UTC",
         })}
-        sub={snapshot.toLocaleTimeString("en-US", {
+        secondaryValue={snapshot.toLocaleTimeString("en-US", {
           hour: "numeric",
           minute: "2-digit",
           hour12: true,
           timeZone: "UTC",
         })}
+        sub="UTC · Weekly refresh"
         icon={CalendarDays}
         iconColor="text-green-500"
         borderColor="border-green-500/40"
@@ -86,6 +99,7 @@ export function KpiCards({
 function KpiCard({
   title,
   value,
+  secondaryValue,
   sub,
   icon: Icon,
   iconColor,
@@ -94,6 +108,7 @@ function KpiCard({
 }: {
   title: string;
   value: string;
+  secondaryValue: string;
   sub: string;
   icon: LucideIcon;
   iconColor: string;
@@ -106,7 +121,7 @@ function KpiCard({
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
         >
-          <Icon className={`h-5 w-5 ${iconColor}`} />
+          <Icon className={`h-6 w-6 ${iconColor}`} />
         </div>
 
         <div className="flex-1">
@@ -114,6 +129,10 @@ function KpiCard({
 
           <p className="mt-1 text-xl font-bold leading-tight text-slate-950 dark:text-white">
             {value}
+          </p>
+
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            {secondaryValue}
           </p>
 
           <p
