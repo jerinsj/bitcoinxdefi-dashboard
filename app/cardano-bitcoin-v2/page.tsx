@@ -13,13 +13,53 @@ import { calculateAssetSupplyChanges } from "@/lib/cardanoBitcoinMetrics";
 import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHistoryStorage";
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
+const cardanoDashboardUrl = "https://bitcoinxdefi.com/cardano-bitcoin-v2";
+const cardanoOgImage = "/og/cardano-bitcoin-dashboard";
+
 export const metadata: Metadata = {
-  title: "Cardano Bitcoin DeFi Dashboard V2 | BitcoinXDeFi",
+  title: "Cardano Bitcoin Dashboard | Wrapped BTC Analytics",
   description:
-    "Development preview of the Cardano Bitcoin DeFi Dashboard by BitcoinXDeFi.",
+    "Track Bitcoin liquidity connected to Cardano, including rsBTC, wanBTC, BTC Karma staking, Cardano wrapped BTC supply, holders, bridge metrics, and historical BTCFi trends.",
+  alternates: {
+    canonical: "/cardano-bitcoin-v2",
+  },
+  keywords: [
+    "Cardano Bitcoin",
+    "Cardano BTC",
+    "wrapped BTC on Cardano",
+    "rsBTC",
+    "wanBTC",
+    "BTC Karma",
+    "Bitcoin DeFi Cardano",
+    "Cardano DeFi analytics",
+    "Bitcoin bridge Cardano",
+  ],
+  openGraph: {
+    title: "Cardano Bitcoin Dashboard | Wrapped BTC Analytics",
+    description:
+      "Track rsBTC, wanBTC, BTC Karma staking, Cardano BTC liquidity, holders, and historical Bitcoin DeFi activity connected to Cardano.",
+    url: "/cardano-bitcoin-v2",
+    siteName: "BitcoinXDeFi Analytics",
+    images: [
+      {
+        url: cardanoOgImage,
+        width: 1200,
+        height: 630,
+        alt: "Cardano Bitcoin Ecosystem Dashboard by BitcoinXDeFi Analytics",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cardano Bitcoin Dashboard | Wrapped BTC Analytics",
+    description:
+      "Track Bitcoin liquidity connected to Cardano, including rsBTC, wanBTC, BTC Karma, bridge metrics, and historical BTCFi trends.",
+    images: [cardanoOgImage],
+  },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 
@@ -33,8 +73,60 @@ export default async function CardanoBitcoinV2Page() {
   const liquidityChange = calculateLiquidityChange(history.chartData, 90);
   const assetChanges = calculateAssetSupplyChanges(history.snapshots, 30);
 
+  const datasetJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: "Cardano Bitcoin DeFi Dashboard",
+    description:
+      "Bitcoin liquidity, wrapped BTC asset supply, protocol metrics, and historical Cardano Bitcoin DeFi analytics.",
+    url: cardanoDashboardUrl,
+    creator: {
+      "@type": "Organization",
+      name: "BitcoinXDeFi Analytics",
+      url: "https://bitcoinxdefi.com",
+    },
+    keywords: [
+      "Cardano Bitcoin",
+      "wrapped BTC",
+      "rsBTC",
+      "wanBTC",
+      "BTC Karma",
+      "Bitcoin DeFi",
+    ],
+    temporalCoverage: "2026/..",
+    isAccessibleForFree: true,
+    license: "https://bitcoinxdefi.com/methodology",
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://bitcoinxdefi.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Cardano Bitcoin Dashboard",
+        item: cardanoDashboardUrl,
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-[#020817] dark:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="mx-auto max-w-7xl space-y-10">
         <DashboardHero />
 
