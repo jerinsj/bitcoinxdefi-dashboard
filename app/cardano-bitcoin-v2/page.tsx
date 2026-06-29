@@ -14,7 +14,7 @@ import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHisto
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
 const cardanoDashboardUrl = "https://bitcoinxdefi.com/cardano-bitcoin-v2";
-const cardanoOgImage = "/og/cardano-bitcoin-dashboard";
+const cardanoOgImage = "/og/cardano-bitcoin-dashboard.png";
 
 export const metadata: Metadata = {
   title: "Cardano Bitcoin Dashboard | Wrapped BTC Analytics",
