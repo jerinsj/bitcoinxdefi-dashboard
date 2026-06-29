@@ -50,20 +50,22 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
   }, [data, selectedRangeConfig]);
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <section className="rounded-2xl border border-[#1f3148] bg-[#07111f] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-orange-500">📈</span>
-            <h2 className="text-2xl font-bold">Total BTC on Cardano</h2>
+            <h2 className="text-2xl font-bold text-white">
+              Total BTC on Cardano
+            </h2>
           </div>
 
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          <p className="mt-1 text-sm text-slate-400">
             {selectedRange} liquidity trend based on tracked Cardano BTC assets.
           </p>
         </div>
 
-        <div className="flex rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs dark:border-slate-800 dark:bg-slate-950">
+        <div className="flex rounded-lg border border-[#1f3148] bg-[#030b18] p-1 text-xs">
           {ranges.map((range) => (
             <button
               key={range.label}
@@ -72,7 +74,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
               className={`rounded-md px-3 py-1 font-semibold transition ${
                 selectedRange === range.label
                   ? "bg-orange-500 text-white"
-                  : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+                  : "text-slate-400 hover:bg-[#0b1728] hover:text-white"
               }`}
             >
               {range.label}
@@ -81,7 +83,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
         </div>
       </div>
 
-      <div className="h-[340px]">
+      <div className="h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={filteredData}
@@ -94,28 +96,28 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
           >
             <defs>
               <linearGradient id="btcGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f97316" stopOpacity={0.35} />
-                <stop offset="95%" stopColor="#f97316" stopOpacity={0.02} />
+                <stop offset="5%" stopColor="#f97316" stopOpacity={0.42} />
+                <stop offset="95%" stopColor="#f97316" stopOpacity={0.03} />
               </linearGradient>
             </defs>
 
             <CartesianGrid
               strokeDasharray="4 4"
               vertical={false}
-              stroke="currentColor"
-              className="text-slate-200 dark:text-slate-800"
+              stroke="#1f3148"
+              opacity={0.45}
             />
 
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: "#94a3b8" }}
               tickLine={false}
               axisLine={false}
               minTickGap={28}
             />
 
             <YAxis
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: "#94a3b8" }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(value) => `${value}`}
@@ -124,11 +126,12 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
 
             <Tooltip
               formatter={(value) => [formatBtc(Number(value)), "BTC"]}
-              labelClassName="text-slate-950"
+              labelStyle={{ color: "#ffffff" }}
               contentStyle={{
                 borderRadius: "12px",
-                border: "1px solid rgb(226 232 240)",
-                background: "white",
+                border: "1px solid #1f3148",
+                background: "#07111f",
+                color: "#ffffff",
               }}
             />
 
@@ -141,7 +144,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
               activeDot={{
                 r: 5,
                 fill: "#f97316",
-                stroke: "white",
+                stroke: "#ffffff",
                 strokeWidth: 2,
               }}
             />
