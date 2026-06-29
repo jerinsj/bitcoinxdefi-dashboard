@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
 import { LiquidityChart } from "@/components/cardano-bitcoin-v2/LiquidityChart";
 import { getCardanoBitcoinDashboardData } from "@/lib/cardanoBitcoinDashboard";
+import { DashboardFooter } from "@/components/cardano-bitcoin-v2/DashboardFooter";
 import {
   calculateLiquidityChange,
   getCardanoBitcoinHistory,
@@ -56,6 +57,7 @@ export default async function CardanoBitcoinV2Page() {
         />
 
         <BtcKarmaPanel />
+        <DashboardFooter updatedAt={dashboard.updatedAt} />
       </div>
     </main>
   );
