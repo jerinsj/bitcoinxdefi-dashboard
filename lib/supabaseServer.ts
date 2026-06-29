@@ -42,14 +42,17 @@ export async function supabaseServerRequest<T>(
     cache: "no-store",
   });
 
+  const responseText = await response.text();
+
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Supabase request failed: ${response.status} ${errorText}`);
+    throw new Error(
+      `Supabase request failed: ${response.status} ${responseText}`
+    );
   }
 
-  if (response.status === 204) {
+  if (!responseText) {
     return null as T;
   }
 
-  return (await response.json()) as T;
+  return JSON.parse(responseText) as T;
 }
