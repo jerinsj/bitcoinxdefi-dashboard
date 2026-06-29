@@ -9,8 +9,15 @@ function toIsoDate(value: string | Date) {
   return new Date(value).toISOString().slice(0, 10);
 }
 
-function calculateChange(currentValue: number, previousValue: number): MetricChange {
-  if (!Number.isFinite(currentValue) || !Number.isFinite(previousValue) || previousValue === 0) {
+function calculateChange(
+  currentValue: number,
+  previousValue: number
+): MetricChange {
+  if (
+    !Number.isFinite(currentValue) ||
+    !Number.isFinite(previousValue) ||
+    previousValue === 0
+  ) {
     return { value: null, direction: "unknown" };
   }
 
@@ -34,9 +41,16 @@ function findLookbackSnapshot(
 
   const targetDate = new Date(`${latest.date}T00:00:00.000Z`);
   targetDate.setUTCDate(targetDate.getUTCDate() - lookbackDays);
+
   const targetIsoDate = toIsoDate(targetDate);
 
-  return [...snapshots].reverse().find((snapshot) => snapshot.date <= targetIsoDate) ?? snapshots[0] ?? null;
+  return (
+    [...snapshots]
+      .reverse()
+      .find((snapshot) => snapshot.date <= targetIsoDate) ??
+    snapshots[0] ??
+    null
+  );
 }
 
 export function calculateAssetSupplyChanges(
@@ -45,6 +59,7 @@ export function calculateAssetSupplyChanges(
 ) {
   const latest = snapshots.at(-1);
   const previous = findLookbackSnapshot(snapshots, lookbackDays);
+
   const changes: Record<string, MetricChange> = {};
 
   if (!latest || !previous) {
@@ -52,10 +67,15 @@ export function calculateAssetSupplyChanges(
   }
 
   for (const asset of latest.assets) {
-    const previousAsset = previous.assets.find((candidate) => candidate.symbol === asset.symbol);
+    const previousAsset = previous.assets.find(
+      (candidate) => candidate.symbol === asset.symbol
+    );
 
     changes[asset.symbol] = previousAsset
-      ? calculateChange(asset.circulatingSupply, previousAsset.circulatingSupply)
+      ? calculateChange(
+          asset.circulatingSupply,
+          previousAsset.circulatingSupply
+        )
       : { value: null, direction: "unknown" };
   }
 
