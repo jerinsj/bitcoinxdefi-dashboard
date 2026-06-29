@@ -6,7 +6,7 @@ import Link from "next/link";
 import "./globals.css";
 
 const siteUrl = "https://bitcoinxdefi.com";
-const defaultOgImage = "/og/cardano-bitcoin-dashboard";
+const defaultOgImage = "/og/cardano-bitcoin-dashboard.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
