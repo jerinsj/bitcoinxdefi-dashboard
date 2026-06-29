@@ -111,7 +111,7 @@ function mergeSnapshots(
 
   byDate.set(liveSnapshot.date, liveSnapshot);
 
-  return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
+  return Array.from(byDate.values()).sort((a, b) => a.date.localeCompare(b.date));
 }
 
 function buildBootstrapSeries(
