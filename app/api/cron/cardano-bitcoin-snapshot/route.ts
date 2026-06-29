@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCardanoBitcoinDashboardData } from "@/lib/cardanoBitcoinDashboard";
 import { createCardanoBitcoinSnapshot } from "@/lib/cardanoBitcoinHistory";
+import { persistCardanoBitcoinSnapshot } from "@/lib/cardanoBitcoinHistoryStorage";
 
 export const dynamic = "force-dynamic";
 
@@ -23,17 +24,19 @@ export async function GET(request: NextRequest) {
   try {
     const dashboard = await getCardanoBitcoinDashboardData();
     const snapshot = createCardanoBitcoinSnapshot(dashboard);
+    await persistCardanoBitcoinSnapshot(snapshot);
 
     return NextResponse.json({
       ok: true,
+      persisted: true,
       snapshot,
-      persisted: false,
-      nextStep:
-        "Connect this endpoint to Supabase, Postgres, Vercel Blob, or a GitHub-backed data writer to persist one snapshot per day.",
     });
-  } catch {
+  } catch (error) {
     return NextResponse.json(
-      { error: "Failed to create Cardano Bitcoin snapshot" },
+      {
+        error: "Failed to create Cardano Bitcoin snapshot",
+        detail: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     );
   }
