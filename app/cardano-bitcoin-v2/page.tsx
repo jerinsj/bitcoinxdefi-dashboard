@@ -49,8 +49,8 @@ export default async function CardanoBitcoinV2Page() {
       ? ((lastPoint.totalBtc - firstPoint.totalBtc) / firstPoint.totalBtc) * 100
       : 0;
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-slate-950 dark:text-white">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <main className="min-h-screen bg-[#020817] px-6 py-10 text-white">
+    <div className="mx-auto max-w-7xl space-y-10">
         <DashboardHero />
         <LiquidityChart data={chartData} />
         <KpiCards
