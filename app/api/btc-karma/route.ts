@@ -1,19 +1,5 @@
 import { NextResponse } from "next/server";
-import { NextResponse } from "next/server";
-import { getBtcKarmaData } from "@/lib/btcKarma";
 
-export async function GET() {
-  const data = await getBtcKarmaData();
-
-  if (!data) {
-    return NextResponse.json(
-      { error: "Failed to load BTC Karma data" },
-      { status: 500 }
-    );
-  }
-
-  return NextResponse.json(data);
-}
 function extractField(html: string, field: string) {
   const regex = new RegExp(`\\\\"${field}\\\\":\\\\"([^\\\\"]+)\\\\"`);
   const match = html.match(regex);
