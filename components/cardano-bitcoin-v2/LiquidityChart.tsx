@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -15,43 +16,67 @@ type ChartPoint = {
   totalBtc: number;
 };
 
+type RangeOption = {
+  label: string;
+  days: number | null;
+};
+
+const ranges: RangeOption[] = [
+  { label: "7D", days: 7 },
+  { label: "30D", days: 30 },
+  { label: "90D", days: 90 },
+  { label: "180D", days: 180 },
+  { label: "1Y", days: 365 },
+  { label: "MAX", days: null },
+];
+
 function formatBtc(value: number) {
   return `${value.toFixed(2)} BTC`;
 }
 
-export function LiquidityChart({
-  data,
-}: {
-  data: ChartPoint[];
-}) {
+export function LiquidityChart({ data }: { data: ChartPoint[] }) {
+  const [selectedRange, setSelectedRange] = useState("90D");
+
+  const selectedRangeConfig = ranges.find(
+    (range) => range.label === selectedRange
+  );
+
+  const filteredData = useMemo(() => {
+    if (!selectedRangeConfig?.days) {
+      return data;
+    }
+
+    return data.slice(-selectedRangeConfig.days);
+  }, [data, selectedRangeConfig]);
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-orange-500">📈</span>
-            <h2 className="text-2xl font-bold">
-              Total BTC on Cardano
-            </h2>
+            <h2 className="text-2xl font-bold">Total BTC on Cardano</h2>
           </div>
 
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-            90-day liquidity trend based on tracked Cardano BTC assets.
+            {selectedRange} liquidity trend based on tracked Cardano BTC assets.
           </p>
         </div>
 
         <div className="flex rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs dark:border-slate-800 dark:bg-slate-950">
-          {["7D", "30D", "90D", "180D", "1Y", "MAX"].map((range) => (
-            <span
-              key={range}
-              className={`rounded-md px-3 py-1 font-semibold ${
-                range === "90D"
+          {ranges.map((range) => (
+            <button
+              key={range.label}
+              type="button"
+              onClick={() => setSelectedRange(range.label)}
+              className={`rounded-md px-3 py-1 font-semibold transition ${
+                selectedRange === range.label
                   ? "bg-orange-500 text-white"
-                  : "text-slate-500 dark:text-slate-400"
+                  : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
               }`}
             >
-              {range}
-            </span>
+              {range.label}
+            </button>
           ))}
         </div>
       </div>
@@ -59,7 +84,7 @@ export function LiquidityChart({
       <div className="h-[340px]">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={data}
+            data={filteredData}
             margin={{
               top: 20,
               right: 24,
