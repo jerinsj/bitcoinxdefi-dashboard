@@ -1,4 +1,6 @@
 import Image from "next/image";
+import type { MetricChange } from "@/lib/cardanoBitcoinMetrics";
+import { formatUsdFromBtc } from "@/lib/cardanoBitcoinMetrics";
 
 type BitcoinAsset = {
   symbol: string;
@@ -6,6 +8,7 @@ type BitcoinAsset = {
   source: string;
   logo?: string;
   methodology: string;
+  trackingMethod?: string;
   formattedCirculatingSupply: string;
   formattedTotalSupply: string;
   circulatingSupply: number;
@@ -27,17 +30,62 @@ function AssetIcon({ src, symbol }: { src?: string; symbol: string }) {
   );
 }
 
+function ChangeCell({ change }: { change?: MetricChange }) {
+  if (!change || change.value === null) {
+    return <span className="text-slate-500 dark:text-slate-400">—</span>;
+  }
+
+  const isPositive = change.value > 0;
+  const isNegative = change.value < 0;
+
+  return (
+    <span
+      className={
+        isPositive
+          ? "text-green-600 dark:text-green-400"
+          : isNegative
+            ? "text-red-600 dark:text-red-400"
+            : "text-slate-500 dark:text-slate-400"
+      }
+    >
+      {isPositive ? "▲" : isNegative ? "▼" : "•"} {isPositive ? "+" : ""}
+      {change.value.toFixed(2)}%
+    </span>
+  );
+}
+
+function MethodologyBadge({ trackingMethod }: { trackingMethod?: string }) {
+  const isEstimate = trackingMethod === "holderAdjusted";
+
+  return (
+    <span
+      className={
+        isEstimate
+          ? "inline-flex rounded-full border border-amber-300 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300"
+          : "inline-flex rounded-full border border-green-300 bg-green-50 px-2 py-1 text-xs font-semibold text-green-700 dark:border-green-500/40 dark:bg-green-500/10 dark:text-green-300"
+      }
+    >
+      {isEstimate ? "Estimated" : "Verified"}
+    </span>
+  );
+}
+
 export function BitcoinAssetsTable({
   assets,
   formattedTotalBtc,
+  btcPriceUsd,
+  assetChanges,
 }: {
   assets: BitcoinAsset[];
   formattedTotalBtc: string;
+  btcPriceUsd: number;
+  assetChanges: Record<string, MetricChange>;
 }) {
   const totalHolders = assets.reduce(
     (sum, asset) => sum + (asset.holderCount ?? 0),
     0
   );
+  const totalBtc = assets.reduce((sum, asset) => sum + asset.circulatingSupply, 0);
 
   return (
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
@@ -103,16 +151,22 @@ export function BitcoinAssetsTable({
                   <p className="font-semibold text-slate-950 dark:text-white">
                     {asset.formattedCirculatingSupply} BTC
                   </p>
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    {formatUsdFromBtc(asset.circulatingSupply, btcPriceUsd)}
+                  </p>
                 </td>
 
                 <td className="px-6 py-4">
                   <p className="font-semibold text-slate-950 dark:text-white">
                     {asset.formattedTotalSupply} BTC
                   </p>
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                    {formatUsdFromBtc(asset.totalSupply, btcPriceUsd)}
+                  </p>
                 </td>
 
-                <td className="px-6 py-4 text-green-600 dark:text-green-400">
-                  ▲ —
+                <td className="px-6 py-4">
+                  <ChangeCell change={assetChanges[asset.symbol]} />
                 </td>
 
                 <td className="px-6 py-4 text-slate-700 dark:text-slate-300">
@@ -120,7 +174,10 @@ export function BitcoinAssetsTable({
                 </td>
 
                 <td className="px-6 py-4 text-slate-600 dark:text-slate-300">
-                  {asset.methodology}
+                  <div className="flex flex-col gap-2">
+                    <MethodologyBadge trackingMethod={asset.trackingMethod} />
+                    <span>{asset.methodology}</span>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -135,15 +192,18 @@ export function BitcoinAssetsTable({
               </td>
 
               <td className="px-6 py-4 text-orange-600 dark:text-orange-400">
-                {formattedTotalBtc} BTC
+                <p>{formattedTotalBtc} BTC</p>
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                  {formatUsdFromBtc(totalBtc, btcPriceUsd)}
+                </p>
               </td>
 
               <td className="px-6 py-4 text-slate-600 dark:text-slate-300">
                 Asset-specific supplies
               </td>
 
-              <td className="px-6 py-4 text-green-600 dark:text-green-400">
-                ▲ —
+              <td className="px-6 py-4 text-slate-500 dark:text-slate-400">
+                Mixed
               </td>
 
               <td className="px-6 py-4 text-orange-600 dark:text-orange-400">
