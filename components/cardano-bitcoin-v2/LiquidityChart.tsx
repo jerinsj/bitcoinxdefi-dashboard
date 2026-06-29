@@ -13,7 +13,15 @@ import {
 
 type ChartPoint = {
   date: string;
+  label?: string;
   totalBtc: number;
+};
+
+type HistorySource = "seeded-history" | "live-history";
+
+type LiquidityChartProps = {
+  data: ChartPoint[];
+  source?: HistorySource;
 };
 
 type RangeOption = {
@@ -34,7 +42,10 @@ function formatBtc(value: number) {
   return `${value.toFixed(2)} BTC`;
 }
 
-export function LiquidityChart({ data }: { data: ChartPoint[] }) {
+export function LiquidityChart({
+  data,
+  source = "seeded-history",
+}: LiquidityChartProps) {
   const [selectedRange, setSelectedRange] = useState("90D");
 
   const selectedRangeConfig = ranges.find(
@@ -49,6 +60,9 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
     return data.slice(-selectedRangeConfig.days);
   }, [data, selectedRangeConfig]);
 
+  const sourceLabel =
+    source === "live-history" ? "saved daily snapshots" : "bootstrap history";
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
@@ -61,7 +75,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
           </div>
 
           <p className="mt-1 text-sm text-slate-600 dark:text-[#cbd5e1]">
-            {selectedRange} liquidity trend based on tracked Cardano BTC assets.
+            {selectedRange} liquidity trend based on {sourceLabel}.
           </p>
         </div>
 
@@ -110,7 +124,7 @@ export function LiquidityChart({ data }: { data: ChartPoint[] }) {
             />
 
             <XAxis
-              dataKey="date"
+              dataKey="label"
               tick={{ fontSize: 12, fill: "currentColor" }}
               tickLine={false}
               axisLine={false}

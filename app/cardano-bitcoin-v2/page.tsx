@@ -4,6 +4,10 @@ import type { Metadata } from "next";
 import { DashboardHero } from "@/components/cardano-bitcoin-v2/DashboardHero";
 import { LiquidityChart } from "@/components/cardano-bitcoin-v2/LiquidityChart";
 import { getCardanoBitcoinDashboardData } from "@/lib/cardanoBitcoinDashboard";
+import {
+  calculateLiquidityChange,
+  getCardanoBitcoinHistory,
+} from "@/lib/cardanoBitcoinHistory";
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
 export const metadata: Metadata = {
@@ -15,44 +19,17 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
-function buildChartData(currentTotal: number) {
-  return Array.from({ length: 90 }, (_, index) => {
-    const today = new Date();
-    const date = new Date(today);
-    date.setUTCDate(today.getUTCDate() - (89 - index));
-
-    const progress = index / 89;
-    const start = currentTotal * 0.78;
-    const value =
-      start + (currentTotal - start) * progress + Math.sin(index / 5) * 0.12;
-
-    return {
-      date: date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        timeZone: "UTC",
-      }),
-      totalBtc: Number(value.toFixed(8)),
-    };
-  });
-}
 
 export default async function CardanoBitcoinV2Page() {
   const dashboard = await getCardanoBitcoinDashboardData();
-  const chartData = buildChartData(dashboard.totalTrackedBtc);
+  const history = getCardanoBitcoinHistory(dashboard);
+  const liquidityChange = calculateLiquidityChange(history.chartData, 90);
 
-  const firstPoint = chartData.at(0);
-  const lastPoint = chartData.at(-1);
-
-  const liquidityChange =
-    firstPoint && lastPoint && firstPoint.totalBtc !== 0
-      ? ((lastPoint.totalBtc - firstPoint.totalBtc) / firstPoint.totalBtc) * 100
-      : 0;
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-[#020817] dark:text-white">
-    <div className="mx-auto max-w-7xl space-y-10">
+      <div className="mx-auto max-w-7xl space-y-10">
         <DashboardHero />
-        <LiquidityChart data={chartData} />
+        <LiquidityChart data={history.chartData} source={history.source} />
         <KpiCards
           totalTrackedBtc={dashboard.totalTrackedBtc}
           protocolCount={dashboard.protocolCount}
@@ -62,8 +39,8 @@ export default async function CardanoBitcoinV2Page() {
           updatedAt={dashboard.updatedAt}
         />
         <BitcoinAssetsTable
-        assets={dashboard.cardano.assets}
-        formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
+          assets={dashboard.cardano.assets}
+          formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
         />
         <BtcKarmaPanel />
       </div>
