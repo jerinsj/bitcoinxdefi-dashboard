@@ -55,7 +55,7 @@ export default function RootLayout({
                   <Link href="/news" className="hover:text-slate-950 dark:hover:text-white">
                     News
                   </Link>
-                  <Link href="/cardano-bitcoin" className="hover:text-slate-950 dark:hover:text-white">
+                  <Link href="/cardano-bitcoin-v2" className="hover:text-slate-950 dark:hover:text-white">
                     Cardano
                   </Link>
                   <Link href="/five-flags" className="hover:text-slate-950 dark:hover:text-white">
