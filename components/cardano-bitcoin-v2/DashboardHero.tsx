@@ -15,24 +15,24 @@ export function DashboardHero() {
           connected to Cardano.
         </p>
 
-        <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#23344d] dark:bg-[#0c1627] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
-          <h3 className="font-semibold text-orange-600 dark:text-orange-400">
+        <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
+          <h3 className="font-semibold text-orange-600 dark:text-[#f59e0b]">
             Live Data Beta
           </h3>
 
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          <p className="mt-1 text-sm text-slate-600 dark:text-[#cbd5e1]">
             This Version 2 dashboard is under development. Live data will be
             connected from the existing BitcoinXDeFi APIs.
           </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#23344d] dark:bg-[#0c1627] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] lg:w-[380px]">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-[#16263a] dark:bg-[#071220] lg:w-[380px]">
         <h2 className="text-xl font-bold text-slate-950 dark:text-white">
           Cardano & Bitcoin
         </h2>
 
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
+        <p className="mt-2 text-slate-600 dark:text-[#cbd5e1]">
           Building a stronger DeFi future by connecting Bitcoin liquidity to
           Cardano.
         </p>
@@ -42,7 +42,7 @@ export function DashboardHero() {
             ₿
           </div>
 
-          <div className="h-px w-12 border-t border-dashed border-slate-300 dark:border-[#23344d]" />
+          <div className="h-px w-12 border-t border-dashed border-slate-300 dark:border-[#223247]" />
 
           <div className="flex h-16 w-16 items-center justify-center rounded-full border border-blue-500 bg-blue-500/10 text-2xl font-bold text-blue-400">
             ₳
