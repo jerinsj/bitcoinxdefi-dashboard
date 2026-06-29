@@ -8,6 +8,7 @@ import {
   calculateLiquidityChange,
   getCardanoBitcoinHistory,
 } from "@/lib/cardanoBitcoinHistory";
+import { calculateAssetSupplyChanges } from "@/lib/cardanoBitcoinMetrics";
 import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHistoryStorage";
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
@@ -28,6 +29,7 @@ export default async function CardanoBitcoinV2Page() {
   ]);
   const history = getCardanoBitcoinHistory(dashboard, persistedSnapshots);
   const liquidityChange = calculateLiquidityChange(history.chartData, 90);
+  const assetChanges = calculateAssetSupplyChanges(history.snapshots, 30);
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-950 dark:bg-[#020817] dark:text-white">
@@ -45,6 +47,8 @@ export default async function CardanoBitcoinV2Page() {
         <BitcoinAssetsTable
           assets={dashboard.cardano.assets}
           formattedTotalBtc={dashboard.cardano.formattedTotalBtc}
+          btcPriceUsd={dashboard.btcPriceUsd}
+          assetChanges={assetChanges}
         />
         <BtcKarmaPanel />
       </div>
