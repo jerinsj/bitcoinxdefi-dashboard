@@ -20,7 +20,6 @@ export function KpiCards({
   protocolCount,
   totalHolders,
   liquidityChange,
-  totalTvlUsd,
   updatedAt,
 }: KpiCardsProps) {
   const snapshot = new Date(updatedAt);
@@ -32,7 +31,9 @@ export function KpiCards({
         value={`${totalTrackedBtc.toLocaleString(undefined, {
           maximumFractionDigits: 8,
         })} BTC`}
-        sub={`${liquidityChange >= 0 ? "+" : ""}${liquidityChange.toFixed(2)}% vs 90 days ago`}
+        sub={`${liquidityChange >= 0 ? "+" : ""}${liquidityChange.toFixed(
+          2
+        )}% vs 90 days ago`}
         icon={Bitcoin}
         iconColor="text-orange-500"
         borderColor="border-orange-500/40"
@@ -100,18 +101,16 @@ function KpiCard({
   bgColor: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3.5 shadow-sm">
-    <div className="flex items-center gap-3">
+    <div className="rounded-2xl border border-[#1f3148] bg-[#07111f] p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
+      <div className="flex items-center gap-3">
         <div
-         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border ${borderColor} ${bgColor}`}
         >
           <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
 
         <div className="flex-1">
-          <p className="text-xs text-slate-400">
-            {title}
-          </p>
+          <p className="text-xs text-slate-400">{title}</p>
 
           <p className="mt-1 text-xl font-bold leading-tight text-white">
             {value}
@@ -121,7 +120,9 @@ function KpiCard({
             className={`mt-1 text-xs ${
               sub.startsWith("+")
                 ? "text-green-400"
-                : "text-slate-400"
+                : sub.startsWith("-")
+                  ? "text-red-400"
+                  : "text-slate-400"
             }`}
           >
             {sub}
