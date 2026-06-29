@@ -1,31 +1,78 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Bitcoin, ExternalLink, LockKeyhole, Users, Layers } from "lucide-react";
 
-const BTC_KARMA_DASHBOARD_URL = "#"; // replace with real BTC Karma dashboard link
+const BTC_KARMA_DASHBOARD_URL = "https://staking.btckarma.io/";
 
-const stats = [
-  {
-    label: "BTC Staked",
-    value: "Coming soon",
-    icon: Bitcoin,
-  },
-  {
-    label: "TVL",
-    value: "Coming soon",
-    icon: LockKeyhole,
-  },
-  {
-    label: "Unique Wallets",
-    value: "Coming soon",
-    icon: Users,
-  },
-  {
-    label: "Positions",
-    value: "Coming soon",
-    icon: Layers,
-  },
-];
+type BtcKarmaData = {
+  formattedTotalBtcStaked: string;
+  formattedTvlUsd: string;
+  uniqueWallets: number;
+  totalPositions: number;
+  updatedAt: string;
+};
 
 export function BtcKarmaPanel() {
+  const [data, setData] = useState<BtcKarmaData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadBtcKarmaData() {
+      try {
+        const response = await fetch("/api/btc-karma");
+        const result = await response.json();
+
+        if (response.ok) {
+          setData(result);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadBtcKarmaData();
+  }, []);
+
+  const stats = [
+    {
+      label: "BTC Staked",
+      value: loading
+        ? "Loading..."
+        : data
+          ? `${data.formattedTotalBtcStaked} BTC`
+          : "Unavailable",
+      icon: Bitcoin,
+    },
+    {
+      label: "TVL",
+      value: loading
+        ? "Loading..."
+        : data
+          ? data.formattedTvlUsd
+          : "Unavailable",
+      icon: LockKeyhole,
+    },
+    {
+      label: "Unique Wallets",
+      value: loading
+        ? "Loading..."
+        : data
+          ? data.uniqueWallets.toLocaleString()
+          : "Unavailable",
+      icon: Users,
+    },
+    {
+      label: "Positions",
+      value: loading
+        ? "Loading..."
+        : data
+          ? data.totalPositions.toLocaleString()
+          : "Unavailable",
+      icon: Layers,
+    },
+  ];
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
@@ -79,7 +126,11 @@ export function BtcKarmaPanel() {
               </p>
 
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                Awaiting live data source
+                {data?.updatedAt
+                  ? `Updated ${new Date(data.updatedAt).toLocaleString()}`
+                  : loading
+                    ? "Fetching live BTC Karma data"
+                    : "BTC Karma data unavailable"}
               </p>
             </div>
           );
