@@ -8,6 +8,7 @@ import {
   calculateLiquidityChange,
   getCardanoBitcoinHistory,
 } from "@/lib/cardanoBitcoinHistory";
+import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHistoryStorage";
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
 export const metadata: Metadata = {
@@ -21,8 +22,11 @@ export const metadata: Metadata = {
 };
 
 export default async function CardanoBitcoinV2Page() {
-  const dashboard = await getCardanoBitcoinDashboardData();
-  const history = getCardanoBitcoinHistory(dashboard);
+  const [dashboard, persistedSnapshots] = await Promise.all([
+    getCardanoBitcoinDashboardData(),
+    fetchPersistedCardanoBitcoinSnapshots(),
+  ]);
+  const history = getCardanoBitcoinHistory(dashboard, persistedSnapshots);
   const liquidityChange = calculateLiquidityChange(history.chartData, 90);
 
   return (
