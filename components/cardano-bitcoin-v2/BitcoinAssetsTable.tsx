@@ -48,7 +48,8 @@ function ChangeCell({ change }: { change?: MetricChange }) {
             : "text-slate-500 dark:text-slate-400"
       }
     >
-      {isPositive ? "▲" : isNegative ? "▼" : "•"} {isPositive ? "+" : ""}
+      {isPositive ? "▲" : isNegative ? "▼" : "•"}{" "}
+      {isPositive ? "+" : ""}
       {change.value.toFixed(2)}%
     </span>
   );
@@ -85,7 +86,11 @@ export function BitcoinAssetsTable({
     (sum, asset) => sum + (asset.holderCount ?? 0),
     0
   );
-  const totalBtc = assets.reduce((sum, asset) => sum + asset.circulatingSupply, 0);
+
+  const totalBtc = assets.reduce(
+    (sum, asset) => sum + asset.circulatingSupply,
+    0
+  );
 
   return (
     <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-[#16263a] dark:bg-[#071220]">
