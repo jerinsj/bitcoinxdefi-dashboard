@@ -1,3 +1,4 @@
+import { hasSupabaseServerConfig, supabaseServerRequest } from "@/lib/supabaseServer";
 import type {
   CardanoBitcoinAssetSnapshot,
   CardanoBitcoinHistorySnapshot,
@@ -34,61 +35,6 @@ type ProtocolSnapshotRow = {
   positions: number | null;
 };
 
-type SupabaseConfig = {
-  url: string;
-  key: string;
-};
-
-function getSupabaseConfig(): SupabaseConfig | null {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!url || !key) {
-    return null;
-  }
-
-  return {
-    url: url.replace(/\/$/, ""),
-    key,
-  };
-}
-
-function supabaseHeaders(config: SupabaseConfig) {
-  return {
-    apikey: config.key,
-    authorization: `Bearer ${config.key}`,
-    "content-type": "application/json",
-  };
-}
-
-async function supabaseRequest<T>(path: string, init?: RequestInit): Promise<T> {
-  const config = getSupabaseConfig();
-
-  if (!config) {
-    throw new Error("Missing Supabase environment variables");
-  }
-
-  const response = await fetch(`${config.url}/rest/v1/${path}`, {
-    ...init,
-    headers: {
-      ...supabaseHeaders(config),
-      ...(init?.headers ?? {}),
-    },
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Supabase request failed: ${response.status} ${errorText}`);
-  }
-
-  if (response.status === 204) {
-    return null as T;
-  }
-
-  return (await response.json()) as T;
-}
-
 function toNumber(value: number | string | null | undefined) {
   return Number(value ?? 0);
 }
@@ -119,18 +65,18 @@ function toProtocolSnapshot(
 }
 
 export async function fetchPersistedCardanoBitcoinSnapshots() {
-  if (!getSupabaseConfig()) {
+  if (!hasSupabaseServerConfig()) {
     return [];
   }
 
   const [dailyRows, assetRows, protocolRows] = await Promise.all([
-    supabaseRequest<DailySnapshotRow[]>(
+    supabaseServerRequest<DailySnapshotRow[]>(
       "cardano_bitcoin_daily_snapshots?select=*&order=snapshot_date.asc"
     ),
-    supabaseRequest<AssetSnapshotRow[]>(
+    supabaseServerRequest<AssetSnapshotRow[]>(
       "cardano_bitcoin_asset_snapshots?select=*&order=snapshot_date.asc,symbol.asc"
     ),
-    supabaseRequest<ProtocolSnapshotRow[]>(
+    supabaseServerRequest<ProtocolSnapshotRow[]>(
       "cardano_bitcoin_protocol_snapshots?select=*&order=snapshot_date.asc,name.asc"
     ),
   ]);
@@ -196,7 +142,7 @@ function toProtocolRows(snapshot: CardanoBitcoinHistorySnapshot) {
 export async function persistCardanoBitcoinSnapshot(
   snapshot: CardanoBitcoinHistorySnapshot
 ) {
-  await supabaseRequest(
+  await supabaseServerRequest(
     "cardano_bitcoin_daily_snapshots?on_conflict=snapshot_date",
     {
       method: "POST",
@@ -209,7 +155,7 @@ export async function persistCardanoBitcoinSnapshot(
 
   const assetRows = toAssetRows(snapshot);
   if (assetRows.length > 0) {
-    await supabaseRequest(
+    await supabaseServerRequest(
       "cardano_bitcoin_asset_snapshots?on_conflict=snapshot_date,symbol",
       {
         method: "POST",
@@ -223,7 +169,7 @@ export async function persistCardanoBitcoinSnapshot(
 
   const protocolRows = toProtocolRows(snapshot);
   if (protocolRows.length > 0) {
-    await supabaseRequest(
+    await supabaseServerRequest(
       "cardano_bitcoin_protocol_snapshots?on_conflict=snapshot_date,name",
       {
         method: "POST",
