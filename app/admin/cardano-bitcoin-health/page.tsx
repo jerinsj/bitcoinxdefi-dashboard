@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { DataSourceStatusPanel } from "@/components/cardano-bitcoin-v2/DataSourceStatusPanel";
 import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHistoryStorage";
+import AdminHealthPasscodeForm from "./passcode-form";
 
 export const dynamic = "force-dynamic";
 
@@ -191,6 +193,12 @@ async function checkHistoricalSnapshots(): Promise<HealthStatus> {
 }
 
 export default async function CardanoBitcoinHealthPage() {
+  const hasAccess = cookies().get("cardano_health_access")?.value === "true";
+
+  if (!hasAccess) {
+    return <AdminHealthPasscodeForm />;
+  }
+
   const statuses = await Promise.all([
     checkCardanoBitcoinApi(),
     checkBtcKarmaApi(),
@@ -212,7 +220,7 @@ export default async function CardanoBitcoinHealthPage() {
             Cardano Bitcoin Data Health
           </h1>
           <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-            Internal status page for checking whether the Cardano Bitcoin dashboard data sources are online, fresh, and returning usable data. This page is hidden from navigation and marked noindex.
+            Internal status page for checking whether the Cardano Bitcoin dashboard data sources are online, fresh, and returning usable data. This page is hidden from navigation, protected by passcode, and marked noindex.
           </p>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
