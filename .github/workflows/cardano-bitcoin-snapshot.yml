@@ -1,0 +1,16 @@
+name: Cardano Bitcoin Snapshot
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Cardano Bitcoin snapshot
+        run: |
+          curl -f -X GET "https://bitcoinxdefi.com/api/cron/cardano-bitcoin-snapshot" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
