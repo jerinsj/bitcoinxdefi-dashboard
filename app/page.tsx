@@ -184,11 +184,13 @@ export default function HomePage() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button className="rounded-2xl bg-orange-500 text-white hover:bg-orange-600">
+                <Button className="rounded-2xl bg-orange-500 text-white hover:bg-orange-600"
+                 onClick={() => (window.location.href = "/cardano-bitcoin-v2")} >
                   View Protocols
                 </Button>
 
-                <Button variant="secondary" className="rounded-2xl">
+                <Button variant="secondary" className="rounded-2xl"
+                  onClick={() => (window.location.href = "/methodology")} >
                   Read Risk Methodology
                 </Button>
               </div>
