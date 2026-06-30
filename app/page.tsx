@@ -186,7 +186,7 @@ export default function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button className="rounded-2xl bg-orange-500 text-white hover:bg-orange-600"
                  onClick={() => (window.location.href = "/cardano-bitcoin-v2")} >
-                  View Protocols
+                  Cardano Bitcoin Dashboard
                 </Button>
 
                 <Button variant="secondary" className="rounded-2xl"
