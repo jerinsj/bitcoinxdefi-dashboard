@@ -1,12 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Bitcoin DeFi Analytics",
+  description:
+    "Learn about Bitcoin DeFi Analytics, an independent educational research dashboard for Bitcoin DeFi ecosystems, wrapped BTC, bridges, and cross-chain liquidity.",
+  alternates: {
+    canonical: "/about",
+  },
+};
+
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-12 text-slate-950 dark:text-white">
       <h1 className="text-3xl font-bold tracking-tight">
-        About BitcoinXDeFi Analytics
+        About Bitcoin DeFi Analytics
       </h1>
 
       <p className="mt-6 text-base leading-7 text-slate-600 dark:text-slate-300">
-        BitcoinXDeFi Analytics is an independent educational and research
+        Bitcoin DeFi Analytics is an independent educational and research
         dashboard focused on Bitcoin DeFi ecosystems, wrapped BTC
         infrastructure, BTC liquidity trends, and cross-chain interoperability.
       </p>
@@ -35,9 +46,10 @@ export default function AboutPage() {
       </h2>
 
       <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
-        The dashboard uses public data sources such as CoinGecko and DeFiLlama
-        to display market data, protocol TVL, and ecosystem metrics. Data may be
-        delayed, incomplete, or revised by source providers.
+        The dashboard uses public data sources such as CoinGecko, DeFiLlama,
+        Cardano chain data, bridge dashboards, and protocol data feeds to display
+        market data, protocol TVL, and ecosystem metrics. Data may be delayed,
+        incomplete, or revised by source providers.
       </p>
 
       <h2 className="mt-10 text-xl font-semibold text-slate-950 dark:text-white">
@@ -45,7 +57,7 @@ export default function AboutPage() {
       </h2>
 
       <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
-        BitcoinXDeFi Analytics is for educational and informational purposes
+        Bitcoin DeFi Analytics is for educational and informational purposes
         only. Nothing on this site should be interpreted as financial,
         investment, legal, or tax advice.
       </p>

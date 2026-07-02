@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Create Cardano Bitcoin snapshot
         run: |
-          curl -L -f -i -X GET "https://www.bitcoinxdefi.com/api/cron/cardano-bitcoin-snapshot" \
-          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
+          curl -L -f -i -X GET "https://bitcoindefi.us/api/cron/cardano-bitcoin-snapshot" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

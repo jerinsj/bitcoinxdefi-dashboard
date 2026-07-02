@@ -6,9 +6,12 @@ import AdminHealthPasscodeForm from "./passcode-form";
 
 export const dynamic = "force-dynamic";
 
+const siteUrl = "https://bitcoindefi.us";
+
 export const metadata: Metadata = {
   title: "Cardano Bitcoin Data Health | Admin",
-  description: "Administrative health checks for Cardano Bitcoin dashboard data sources.",
+  description:
+    "Administrative health checks for Bitcoin DeFi Analytics Cardano Bitcoin dashboard data sources.",
   robots: {
     index: false,
     follow: false,
@@ -51,14 +54,15 @@ function getFreshnessStatus(value?: string | null, warningHours = 48): StatusLev
 
 async function checkCardanoBitcoinApi(): Promise<HealthStatus> {
   try {
-    const response = await fetch("https://www.bitcoinxdefi.com/api/cardano-bitcoin", {
+    const response = await fetch(`${siteUrl}/api/cardano-bitcoin`, {
       cache: "no-store",
     });
 
     if (!response.ok) {
       return {
         name: "Cardano Bitcoin API",
-        description: "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
+        description:
+          "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
         status: "offline",
         lastUpdated: null,
         detail: `API returned HTTP ${response.status}.`,
@@ -69,7 +73,8 @@ async function checkCardanoBitcoinApi(): Promise<HealthStatus> {
 
     return {
       name: "Cardano Bitcoin API",
-      description: "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
+      description:
+        "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
       status: getFreshnessStatus(data.updatedAt, 48),
       lastUpdated: data.updatedAt,
       detail: `${data.assets?.length ?? 0} assets returned. Total tracked BTC: ${data.totalBtc ?? "Unavailable"}.`,
@@ -77,7 +82,8 @@ async function checkCardanoBitcoinApi(): Promise<HealthStatus> {
   } catch (error) {
     return {
       name: "Cardano Bitcoin API",
-      description: "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
+      description:
+        "Supplies Cardano BTC asset balances, holder counts, and tracked BTC totals.",
       status: "offline",
       lastUpdated: null,
       detail: error instanceof Error ? error.message : "Request failed.",
@@ -87,14 +93,15 @@ async function checkCardanoBitcoinApi(): Promise<HealthStatus> {
 
 async function checkBtcKarmaApi(): Promise<HealthStatus> {
   try {
-    const response = await fetch("https://www.bitcoinxdefi.com/api/btc-karma", {
+    const response = await fetch(`${siteUrl}/api/btc-karma`, {
       cache: "no-store",
     });
 
     if (!response.ok) {
       return {
         name: "BTC Karma API",
-        description: "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
+        description:
+          "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
         status: "warning",
         lastUpdated: null,
         detail: `API returned HTTP ${response.status}. Dashboard can still load without BTC Karma data.`,
@@ -105,7 +112,8 @@ async function checkBtcKarmaApi(): Promise<HealthStatus> {
 
     return {
       name: "BTC Karma API",
-      description: "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
+      description:
+        "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
       status: getFreshnessStatus(data.updatedAt, 168),
       lastUpdated: data.updatedAt,
       detail: `BTC staked: ${data.totalBtcStaked ?? "Unavailable"}. Wallets: ${data.uniqueWallets ?? "Unavailable"}.`,
@@ -113,7 +121,8 @@ async function checkBtcKarmaApi(): Promise<HealthStatus> {
   } catch (error) {
     return {
       name: "BTC Karma API",
-      description: "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
+      description:
+        "Supplies BTC Karma staking, TVL, wallets, and position metrics.",
       status: "warning",
       lastUpdated: null,
       detail: error instanceof Error ? error.message : "Request failed.",
@@ -146,7 +155,9 @@ async function checkCoinGecko(): Promise<HealthStatus> {
       description: "Supplies BTC/USD pricing used for secondary USD values.",
       status: price ? "healthy" : "warning",
       lastUpdated: new Date().toISOString(),
-      detail: price ? `BTC/USD returned: $${price.toLocaleString()}.` : "BTC/USD price was unavailable.",
+      detail: price
+        ? `BTC/USD returned: $${price.toLocaleString()}.`
+        : "BTC/USD price was unavailable.",
     };
   } catch (error) {
     return {
@@ -167,7 +178,8 @@ async function checkHistoricalSnapshots(): Promise<HealthStatus> {
     if (!latestSnapshot) {
       return {
         name: "Historical Snapshots",
-        description: "Supabase-backed daily snapshots powering historical charts and percentage changes.",
+        description:
+          "Supabase-backed daily snapshots powering historical charts and percentage changes.",
         status: "warning",
         lastUpdated: null,
         detail: "No persisted snapshots were returned from Supabase.",
@@ -176,7 +188,8 @@ async function checkHistoricalSnapshots(): Promise<HealthStatus> {
 
     return {
       name: "Historical Snapshots",
-      description: "Supabase-backed daily snapshots powering historical charts and percentage changes.",
+      description:
+        "Supabase-backed daily snapshots powering historical charts and percentage changes.",
       status: getFreshnessStatus(`${latestSnapshot.date}T00:00:00.000Z`, 48),
       lastUpdated: latestSnapshot.updatedAt,
       detail: `${snapshots.length} persisted snapshots found. Latest snapshot date: ${latestSnapshot.date}.`,
@@ -184,7 +197,8 @@ async function checkHistoricalSnapshots(): Promise<HealthStatus> {
   } catch (error) {
     return {
       name: "Historical Snapshots",
-      description: "Supabase-backed daily snapshots powering historical charts and percentage changes.",
+      description:
+        "Supabase-backed daily snapshots powering historical charts and percentage changes.",
       status: "offline",
       lastUpdated: null,
       detail: error instanceof Error ? error.message : "Supabase snapshot check failed.",

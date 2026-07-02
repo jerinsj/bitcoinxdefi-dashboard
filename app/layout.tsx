@@ -5,15 +5,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 
-const siteUrl = "https://bitcoinxdefi.com";
+const siteUrl = "https://bitcoindefi.us";
 const defaultOgImage = "/og/cardano-bitcoin-dashboard.png";
+const brandName = "Bitcoin DeFi Analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "BitcoinXDeFi Analytics",
+  applicationName: brandName,
   title: {
-    default: "BitcoinXDeFi Analytics | Bitcoin DeFi Dashboards",
-    template: "%s | BitcoinXDeFi Analytics",
+    default: "Bitcoin DeFi Analytics | Bitcoin DeFi Dashboards",
+    template: `%s | ${brandName}`,
   },
   description:
     "Bitcoin DeFi analytics for BTC liquidity, wrapped Bitcoin assets, protocol tracking, Cardano Bitcoin metrics, bridge activity, and risk intelligence.",
@@ -30,11 +31,11 @@ export const metadata: Metadata = {
     "Bitcoin bridges",
     "DeFi analytics",
     "BTC dashboard",
-    "BitcoinXDeFi",
+    "Bitcoin DeFi Analytics",
   ],
-  authors: [{ name: "BitcoinXDeFi Analytics" }],
-  creator: "BitcoinXDeFi Analytics",
-  publisher: "BitcoinXDeFi Analytics",
+  authors: [{ name: brandName }],
+  creator: brandName,
+  publisher: brandName,
   robots: {
     index: true,
     follow: true,
@@ -50,8 +51,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "BitcoinXDeFi Analytics",
-    title: "BitcoinXDeFi Analytics | Bitcoin DeFi Dashboards",
+    siteName: brandName,
+    title: "Bitcoin DeFi Analytics | Bitcoin DeFi Dashboards",
     description:
       "Track where Bitcoin liquidity is moving across DeFi, wrapped BTC infrastructure, Cardano Bitcoin assets, bridges, and BTCFi protocols.",
     images: [
@@ -59,13 +60,13 @@ export const metadata: Metadata = {
         url: defaultOgImage,
         width: 1200,
         height: 630,
-        alt: "BitcoinXDeFi Analytics Cardano Bitcoin dashboard preview",
+        alt: "Bitcoin DeFi Analytics Cardano Bitcoin dashboard preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BitcoinXDeFi Analytics | Bitcoin DeFi Dashboards",
+    title: "Bitcoin DeFi Analytics | Bitcoin DeFi Dashboards",
     description:
       "Bitcoin DeFi analytics for BTC liquidity, wrapped Bitcoin assets, Cardano Bitcoin metrics, and protocol tracking.",
     images: [defaultOgImage],
@@ -84,7 +85,7 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "BitcoinXDeFi Analytics",
+    name: brandName,
     url: siteUrl,
     logo: `${siteUrl}/btcxdefilogo.png`,
     description:
@@ -95,11 +96,11 @@ export default function RootLayout({
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "BitcoinXDeFi Analytics",
+    name: brandName,
     url: siteUrl,
     publisher: {
       "@type": "Organization",
-      name: "BitcoinXDeFi Analytics",
+      name: brandName,
       logo: `${siteUrl}/btcxdefilogo.png`,
     },
   };
@@ -121,7 +122,7 @@ export default function RootLayout({
               <Link href="/" className="flex items-center gap-3">
                 <Image
                   src="/btcxdefilogo.png"
-                  alt="BitcoinXDeFi"
+                  alt="Bitcoin DeFi"
                   width={48}
                   height={48}
                   className="rounded-xl"
@@ -130,7 +131,7 @@ export default function RootLayout({
 
                 <div>
                   <div className="text-xl font-black text-slate-950 dark:text-white">
-                    BitcoinXDeFi Analytics
+                    Bitcoin DeFi Analytics
                   </div>
                   <div className="text-sm text-slate-500 dark:text-slate-400">
                     Daily Dose of Bitcoin
