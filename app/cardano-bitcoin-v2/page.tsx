@@ -13,8 +13,10 @@ import { calculateAssetSupplyChanges } from "@/lib/cardanoBitcoinMetrics";
 import { fetchPersistedCardanoBitcoinSnapshots } from "@/lib/cardanoBitcoinHistoryStorage";
 import { BtcKarmaPanel } from "@/components/btc-karma-panel";
 
-const cardanoDashboardUrl = "https://bitcoinxdefi.com/cardano-bitcoin-v2";
+const siteUrl = "https://bitcoindefi.us";
+const cardanoDashboardUrl = `${siteUrl}/cardano-bitcoin-v2`;
 const cardanoOgImage = "/og/cardano-bitcoin-dashboard.png";
+const brandName = "Bitcoin DeFi Analytics";
 
 export const metadata: Metadata = {
   title: "Cardano Bitcoin Dashboard | Wrapped BTC Analytics",
@@ -39,13 +41,13 @@ export const metadata: Metadata = {
     description:
       "Track rsBTC, wanBTC, BTC Karma staking, Cardano BTC liquidity, holders, and historical Bitcoin DeFi activity connected to Cardano.",
     url: "/cardano-bitcoin-v2",
-    siteName: "BitcoinXDeFi Analytics",
+    siteName: brandName,
     images: [
       {
         url: cardanoOgImage,
         width: 1200,
         height: 630,
-        alt: "Cardano Bitcoin Ecosystem Dashboard by BitcoinXDeFi Analytics",
+        alt: "Cardano Bitcoin Ecosystem Dashboard by Bitcoin DeFi Analytics",
       },
     ],
     type: "website",
@@ -82,8 +84,8 @@ export default async function CardanoBitcoinV2Page() {
     url: cardanoDashboardUrl,
     creator: {
       "@type": "Organization",
-      name: "BitcoinXDeFi Analytics",
-      url: "https://bitcoinxdefi.com",
+      name: brandName,
+      url: siteUrl,
     },
     keywords: [
       "Cardano Bitcoin",
@@ -95,7 +97,6 @@ export default async function CardanoBitcoinV2Page() {
     ],
     temporalCoverage: "2026/..",
     isAccessibleForFree: true,
-    license: "https://bitcoinxdefi.com/methodology",
   };
 
   const breadcrumbJsonLd = {
@@ -106,7 +107,7 @@ export default async function CardanoBitcoinV2Page() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://bitcoinxdefi.com",
+        item: siteUrl,
       },
       {
         "@type": "ListItem",
