@@ -169,7 +169,7 @@ export default function HomePage() {
             <CardContent className="p-8">
               <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-700 dark:bg-white/10 dark:text-white/80">
                 <Globe2 className="h-4 w-4" />
-                bitcoinxdefi.com • bitcoinxdefi.net • bitcoinxdefi.org •
+                
                 bitcoindefi.us
               </div>
 
