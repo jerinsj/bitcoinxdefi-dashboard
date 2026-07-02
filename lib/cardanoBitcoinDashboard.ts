@@ -4,6 +4,8 @@ type CoinGeckoBitcoinResponse = {
   };
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bitcoindefi.us";
+
 async function fetchBitcoinPriceUsd() {
   try {
     const response = await fetch(
@@ -24,10 +26,10 @@ async function fetchBitcoinPriceUsd() {
 
 export async function getCardanoBitcoinDashboardData() {
   const [cardanoRes, karmaRes, btcPriceUsd] = await Promise.all([
-    fetch("https://bitcoinxdefi.com/api/cardano-bitcoin", {
+    fetch(`${siteUrl}/api/cardano-bitcoin`, {
       next: { revalidate: 604800 },
     }),
-    fetch("https://bitcoinxdefi.com/api/btc-karma", {
+    fetch(`${siteUrl}/api/btc-karma`, {
       next: { revalidate: 604800 },
     }),
     fetchBitcoinPriceUsd(),
